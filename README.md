@@ -1,5 +1,5 @@
-Sakinah 
-Description:  
+**Sakinah 
+Description:  **
 Sakina is a digital platform connecting Muslims with qualified Islamic scholars and mental health professionals to navigate conditions like OCD, ADHD, and Tourette's by bridging religious guidance and evidence-based care in one place.
 Problem: 
 Muslims struggle to find mental health care that is both clinically appropriate and religiously comfortable.
