@@ -1,0 +1,1253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sakinah — Faith-Aligned Mental Health Support</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cream:#F7F3EE; --warm-white:#FDFAF6; --deep-green:#1A3A2F;
+  --mid-green:#2D5C47; --light-green:#4A8C6F; --gold:#C9A84C;
+  --gold-light:#E8D5A3; --gold-pale:#FBF5E6;
+  --text-dark:#1A1A1A; --text-mid:#4A4A4A; --text-muted:#8A8A8A;
+  --border:rgba(26,58,47,0.12); --border-gold:rgba(201,168,76,0.25);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;background:var(--warm-white);color:var(--text-dark);overflow-x:hidden;}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:1.25rem 3rem;background:rgba(253,250,246,0.92);backdrop-filter:blur(12px);border-bottom:0.5px solid var(--border);}
+.nav-logo{font-family:'Playfair Display',serif;font-size:1.4rem;color:var(--deep-green);cursor:pointer;letter-spacing:.02em;}
+.nav-logo span{color:var(--gold);font-style:italic;}
+.nav-links{display:flex;gap:2.5rem;align-items:center;}
+.nav-links a{text-decoration:none;font-size:.85rem;color:var(--text-mid);letter-spacing:.04em;transition:color .2s;cursor:pointer;}
+.nav-links a:hover{color:var(--deep-green);}
+.nav-cta{background:var(--deep-green)!important;color:white!important;padding:.55rem 1.4rem;border-radius:100px;font-weight:500!important;font-size:.82rem!important;}
+
+.page{display:none;}.page.active{display:block;}
+
+/* HERO */
+.hero-bg-pattern{position:absolute;inset:0;opacity:.035;background-image:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%231A3A2F' fill-opacity='1'%3E%3Cpath d='M30 0l5.88 18.09L54.13 7.03 43.07 25.29 61.16 25.29 43.07 34.71 54.13 52.97 36.04 41.91 30 60 23.96 41.91 5.87 52.97 16.93 34.71 -1.16 25.29 16.93 25.29 5.87 7.03 23.96 18.09z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");}
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:8rem 2rem 4rem;position:relative;background:var(--warm-white);overflow:hidden;}
+.hero::before{content:'';position:absolute;top:-200px;right:-200px;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(201,168,76,0.06) 0%,transparent 70%);}
+.hero::after{content:'';position:absolute;bottom:-150px;left:-150px;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(26,58,47,0.04) 0%,transparent 70%);}
+.hero-arabic{font-size:2.5rem;color:var(--gold);margin-bottom:1rem;opacity:0;animation:fadeUp .8s ease .1s forwards;letter-spacing:.05em;}
+.hero-eyebrow{font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--text-muted);margin-bottom:1rem;opacity:0;animation:fadeUp .8s ease .2s forwards;}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(3rem,7vw,5.5rem);font-weight:400;color:var(--deep-green);line-height:1.1;margin-bottom:1rem;opacity:0;animation:fadeUp .8s ease .25s forwards;}
+.hero-title em{font-style:italic;color:var(--gold);}
+.hero-sub{font-size:1.1rem;color:var(--text-mid);max-width:520px;line-height:1.7;font-weight:300;margin:0 auto 2.5rem;opacity:0;animation:fadeUp .8s ease .4s forwards;}
+.hero-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;opacity:0;animation:fadeUp .8s ease .55s forwards;}
+.btn-primary{background:var(--deep-green);color:white;padding:.85rem 2rem;border-radius:100px;font-size:.9rem;font-weight:500;text-decoration:none;border:none;cursor:pointer;transition:all .2s;font-family:'DM Sans',sans-serif;letter-spacing:.02em;box-shadow:0 8px 24px rgba(26,58,47,.08);}
+.btn-primary:hover{background:var(--mid-green);transform:translateY(-2px);}
+.btn-outline{background:transparent;color:var(--deep-green);padding:.85rem 2rem;border-radius:100px;font-size:.9rem;font-weight:400;text-decoration:none;border:1px solid var(--border);cursor:pointer;transition:all .2s;font-family:'DM Sans',sans-serif;letter-spacing:.02em;}
+.btn-outline:hover{border-color:var(--deep-green);background:var(--cream);}
+.hero-scroll{position:absolute;bottom:2.5rem;display:flex;flex-direction:column;align-items:center;gap:6px;opacity:0;animation:fadeUp .8s ease 1s forwards;}
+.hero-scroll span{font-size:.68rem;letter-spacing:.12em;color:var(--text-muted);text-transform:uppercase;}
+.scroll-line{width:1px;height:36px;background:linear-gradient(to bottom,var(--gold),transparent);}
+
+/* TRUST BAR */
+.trust-bar{background:var(--deep-green);padding:1.25rem 3rem;display:flex;align-items:center;justify-content:center;gap:3rem;flex-wrap:wrap;}
+.trust-item{display:flex;align-items:center;gap:.6rem;font-size:.82rem;color:rgba(255,255,255,.85);}
+.trust-dot{width:5px;height:5px;border-radius:50%;background:var(--gold);flex-shrink:0;}
+
+/* SECTIONS */
+section{padding:6rem 2rem;}
+.container{max-width:1100px;margin:0 auto;}
+.s-label{font-size:.72rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;}
+.s-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3rem);font-weight:400;color:var(--deep-green);line-height:1.2;margin-bottom:1.25rem;}
+.s-title em{font-style:italic;}
+.s-desc{font-size:1rem;color:var(--text-mid);line-height:1.75;max-width:560px;font-weight:300;}
+
+/* PROBLEM */
+.problem-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;margin-top:3.5rem;}
+.problem-pills{display:flex;flex-direction:column;gap:1rem;}
+.prob-pill{background:var(--warm-white);border:.5px solid var(--border);border-radius:16px;padding:1.4rem 1.5rem;display:flex;gap:1rem;align-items:flex-start;box-shadow:0 10px 34px rgba(26,58,47,.04);transition:all .25s;}
+.prob-icon{font-size:1.1rem;flex-shrink:0;margin-top:2px;}
+.prob-title{font-size:.9rem;font-weight:500;color:var(--deep-green);margin-bottom:.3rem;}
+.prob-desc{font-size:.82rem;color:var(--text-mid);line-height:1.65;font-weight:300;}
+.prob-pill:hover{transform:translateY(-2px);border-color:rgba(26,58,47,.22);box-shadow:0 14px 40px rgba(26,58,47,.07);}
+.problem-quote{background:var(--deep-green);border-radius:20px;padding:2.5rem;color:white;position:relative;overflow:hidden;box-shadow:0 20px 50px rgba(26,58,47,.12);}
+.pq-label{font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:1.2rem;}
+.pq-text{font-family:'Playfair Display',serif;font-size:1.25rem;font-style:italic;line-height:1.6;margin-bottom:1.5rem;}
+.pq-source{font-size:.78rem;color:var(--gold-light);}
+.pq-stats{display:flex;gap:2rem;margin-top:2rem;padding-top:1.75rem;border-top:.5px solid rgba(255,255,255,.1);}
+.pq-stat-num{font-family:'Playfair Display',serif;font-size:1.9rem;color:var(--gold);}
+.pq-stat-label{font-size:.72rem;color:rgba(255,255,255,.45);margin-top:2px;}
+
+/* HOW */
+.how{background:var(--cream);}
+.flow-steps{display:flex;flex-direction:column;gap:0;margin-top:3.5rem;}
+.flow-step{display:flex;gap:1.5rem;padding:1.75rem 0;border-bottom:.5px solid var(--border);align-items:flex-start;}
+.flow-step:first-child{border-top:.5px solid var(--border);}
+.flow-num{font-family:'Playfair Display',serif;font-size:1.4rem;color:var(--gold);flex-shrink:0;width:30px;padding-top:2px;}
+.flow-title{font-size:.95rem;font-weight:500;color:var(--deep-green);margin-bottom:.35rem;}
+.flow-desc{font-size:.83rem;color:var(--text-mid);line-height:1.65;font-weight:300;}
+
+/* CONDITIONS */
+.cond-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin-top:3.5rem;}
+.cond-card{background:var(--warm-white);border:.5px solid var(--border);border-radius:16px;padding:1.85rem;transition:all .25s;box-shadow:0 10px 32px rgba(26,58,47,.04);}
+.cond-card:hover{transform:translateY(-3px);border-color:rgba(26,58,47,.22);box-shadow:0 12px 40px rgba(26,58,47,.07);}
+.cond-icon{font-size:1.2rem;margin-bottom:1rem;}
+.cond-title{font-size:.95rem;font-weight:500;color:var(--deep-green);margin-bottom:.45rem;}
+.cond-desc{font-size:.81rem;color:var(--text-mid);line-height:1.65;font-weight:300;}
+.cond-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:1rem;}
+.ctag{font-size:.68rem;padding:2px 9px;border-radius:100px;background:var(--cream);color:var(--text-mid);border:.5px solid var(--border);}
+
+/* STORIES */
+.stories{background:var(--cream);}
+.stories-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin-top:3.5rem;}
+.story-card{background:var(--warm-white);border:.5px solid var(--border);border-radius:18px;padding:2rem;display:flex;flex-direction:column;box-shadow:0 12px 36px rgba(26,58,47,.04);}
+.story-avatar{width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:.9rem;margin-bottom:1.25rem;}
+.av-teal{background:rgba(26,58,47,.1);color:var(--deep-green);}
+.av-gold{background:rgba(201,168,76,.15);color:#7a5c10;}
+.av-sage{background:rgba(74,140,111,.12);color:var(--mid-green);}
+.story-name{font-size:.95rem;font-weight:500;color:var(--deep-green);}
+.story-tag{display:inline-block;font-size:.68rem;padding:2px 9px;border-radius:100px;background:var(--gold-pale);color:#8a6a1a;border:.5px solid var(--border-gold);margin:.4rem 0 1rem;}
+.story-struggle{font-size:.81rem;color:var(--text-mid);line-height:1.65;font-weight:300;margin-bottom:1rem;padding-bottom:1rem;border-bottom:.5px solid var(--border);}
+.story-qmark{font-family:'Playfair Display',serif;font-size:2rem;color:var(--gold);line-height:.5;margin-bottom:.5rem;}
+.story-result{font-size:.82rem;color:var(--deep-green);line-height:1.65;font-style:italic;font-weight:300;flex:1;}
+
+/* PATHWAYS */
+.path-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin-top:3.5rem;}
+.path-card{background:var(--warm-white);border:.5px solid var(--border);border-radius:18px;padding:2rem;position:relative;box-shadow:0 12px 36px rgba(26,58,47,.04);}
+.path-card.feat{background:var(--deep-green);border-color:var(--deep-green);}
+.path-badge{position:absolute;top:-11px;left:50%;transform:translateX(-50%);background:var(--gold);color:white;font-size:.63rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;padding:3px 14px;border-radius:100px;white-space:nowrap;}
+.path-num{font-family:'Playfair Display',serif;font-size:2.2rem;color:var(--gold);margin-bottom:1rem;}
+.path-title{font-size:.95rem;font-weight:500;margin-bottom:.5rem;}
+.path-card:not(.feat) .path-title{color:var(--deep-green);}
+.path-card.feat .path-title{color:white;}
+.path-desc{font-size:.82rem;line-height:1.65;font-weight:300;}
+.path-card:not(.feat) .path-desc{color:var(--text-mid);}
+.path-card.feat .path-desc{color:rgba(255,255,255,.6);}
+.path-link{margin-top:1.5rem;font-size:.8rem;font-weight:500;cursor:pointer;display:flex;align-items:center;gap:5px;}
+.path-card:not(.feat) .path-link{color:var(--deep-green);}
+.path-card.feat .path-link{color:var(--gold);}
+
+/* PROVIDERS */
+.prov-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.1rem;margin-top:1rem;}
+.prov-card{background:var(--warm-white);border:.5px solid var(--border);border-radius:16px;padding:1.5rem;display:flex;gap:1rem;align-items:flex-start;transition:all .2s;box-shadow:0 10px 30px rgba(26,58,47,.04);}
+.prov-card:hover{border-color:rgba(26,58,47,.22);transform:translateY(-2px);box-shadow:0 16px 42px rgba(26,58,47,.08);}
+.prov-avatar{width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:.88rem;flex-shrink:0;}
+.prov-name{font-size:.9rem;font-weight:500;color:var(--deep-green);margin-bottom:2px;}
+.prov-role{font-size:.75rem;color:var(--text-muted);margin-bottom:8px;}
+.prov-tags{display:flex;flex-wrap:wrap;gap:4px;}
+.ptag{font-size:.66rem;padding:2px 8px;border-radius:100px;background:rgba(26,58,47,.07);color:var(--mid-green);}
+
+/* LIBRARY */
+.lib-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.1rem;margin-top:3rem;}
+.lib-card{background:var(--warm-white);border:.5px solid var(--border);border-radius:16px;padding:1.75rem;transition:all .2s;cursor:pointer;box-shadow:0 10px 30px rgba(26,58,47,.04);}
+.lib-card:hover{border-color:rgba(26,58,47,.22);transform:translateY(-2px);}
+.lib-icon{font-size:1.4rem;margin-bottom:.9rem;}
+.lib-title{font-size:.95rem;font-weight:500;color:var(--deep-green);margin-bottom:.4rem;}
+.lib-desc{font-size:.81rem;color:var(--text-mid);line-height:1.65;font-weight:300;margin-bottom:1rem;}
+.lib-link{font-size:.78rem;color:var(--gold);font-weight:500;}
+
+/* AYAH BANNER */
+.ayah-banner{background:var(--deep-green);padding:5rem 2rem;text-align:center;}
+.ayah-arabic{font-size:1.8rem;color:var(--gold);margin-bottom:1rem;}
+.ayah-text{font-family:'Playfair Display',serif;font-size:clamp(1.2rem,2.5vw,1.8rem);color:white;font-style:italic;line-height:1.6;max-width:700px;margin:0 auto 1rem;}
+.ayah-ref{font-size:.8rem;color:var(--gold-light);letter-spacing:.06em;}
+
+/* CHAT */
+.chat-window{background:var(--warm-white);border:.5px solid var(--border);border-radius:20px;max-width:540px;overflow:hidden;margin-top:3rem;box-shadow:0 24px 60px rgba(26,58,47,.10);}
+.chat-header{background:var(--deep-green);padding:1.1rem 1.5rem;display:flex;align-items:center;gap:.75rem;}
+.chat-av{width:36px;height:36px;border-radius:50%;background:rgba(201,168,76,.3);display:flex;align-items:center;justify-content:center;font-size:.75rem;color:var(--gold);font-weight:500;}
+.chat-name{font-size:.88rem;color:white;font-weight:500;}
+.chat-status{font-size:.7rem;color:rgba(255,255,255,.5);}
+.chat-body{padding:1.5rem;display:flex;flex-direction:column;gap:.9rem;}
+.msg{max-width:80%;}
+.msg-bot{align-self:flex-start;}
+.msg-user{align-self:flex-end;}
+.msg-bubble{padding:.75rem 1rem;border-radius:14px;font-size:.83rem;line-height:1.55;}
+.msg-bot .msg-bubble{background:var(--cream);color:var(--text-dark);border-bottom-left-radius:4px;}
+.msg-user .msg-bubble{background:var(--deep-green);color:white;border-bottom-right-radius:4px;}
+.msg-time{font-size:.65rem;color:var(--text-muted);margin-top:4px;padding:0 4px;}
+.msg-user .msg-time{text-align:right;}
+.chat-prompts{padding:0 1.5rem 1.5rem;display:flex;flex-wrap:wrap;gap:6px;}
+.chat-prompt{font-size:.75rem;padding:5px 12px;border-radius:100px;border:.5px solid var(--border);color:var(--text-mid);cursor:pointer;background:var(--cream);transition:all .15s;}
+.chat-prompt:hover{background:var(--deep-green);color:white;border-color:var(--deep-green);}
+.chat-input-row{border-top:.5px solid var(--border);padding:1rem 1.5rem;display:flex;gap:.75rem;align-items:center;}
+.chat-input{flex:1;border:none;background:transparent;font-size:.83rem;font-family:'DM Sans',sans-serif;color:var(--text-dark);outline:none;}
+.chat-input::placeholder{color:var(--text-muted);}
+.chat-send{background:var(--deep-green);color:white;border:none;border-radius:100px;padding:.45rem 1rem;font-size:.75rem;cursor:pointer;font-family:'DM Sans',sans-serif;}
+
+/* TRUST SAFETY */
+.ts-section{background:var(--deep-green);padding:6rem 2rem;}
+.ts-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem;margin-top:3rem;}
+.ts-card{background:rgba(255,255,255,.05);border:.5px solid rgba(255,255,255,.1);border-radius:16px;padding:1.5rem;}
+.ts-icon{font-size:1.1rem;margin-bottom:.9rem;}
+.ts-title{font-size:.9rem;font-weight:500;color:white;margin-bottom:.4rem;}
+.ts-desc{font-size:.8rem;color:rgba(255,255,255,.5);line-height:1.65;}
+
+/* INTAKE */
+.intake-wrap{max-width:680px;margin:3rem auto 0;}
+.intake-progress{display:flex;gap:0;margin-bottom:3rem;}
+.prog-step{flex:1;display:flex;align-items:center;}
+.prog-dot{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:500;flex-shrink:0;transition:all .3s;}
+.prog-dot.done{background:var(--deep-green);color:white;}
+.prog-dot.active{background:var(--gold);color:white;}
+.prog-dot.pending{background:var(--cream);color:var(--text-muted);border:.5px solid var(--border);}
+.prog-line{flex:1;height:1px;background:var(--border);}
+.prog-line.done{background:var(--deep-green);}
+.intake-card{background:var(--warm-white);border:.5px solid var(--border);border-radius:20px;padding:2.5rem;box-shadow:0 18px 48px rgba(26,58,47,.06);}
+.intake-step{display:none;}
+.intake-step.active{display:block;}
+.intake-q{font-family:'Playfair Display',serif;font-size:1.4rem;color:var(--deep-green);margin-bottom:.5rem;}
+.intake-sub{font-size:.85rem;color:var(--text-muted);margin-bottom:2rem;}
+.option-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.75rem;margin-bottom:1.5rem;}
+.option-btn{background:var(--cream);border:.5px solid var(--border);border-radius:14px;padding:1rem 1.25rem;text-align:left;cursor:pointer;transition:all .2s;font-family:'DM Sans',sans-serif;width:100%;}
+.option-btn:hover,.option-btn.selected{background:rgba(26,58,47,.06);border-color:var(--deep-green);transform:translateY(-1px);box-shadow:0 10px 24px rgba(26,58,47,.05);}
+.opt-title{font-size:.88rem;font-weight:500;color:var(--deep-green);margin-bottom:2px;}
+.opt-sub{font-size:.75rem;color:var(--text-muted);}
+.form-group{display:flex;flex-direction:column;gap:.4rem;margin-bottom:1.1rem;}
+.form-group label{font-size:.77rem;color:var(--text-muted);letter-spacing:.04em;}
+.form-group input,.form-group select,.form-group textarea{background:var(--cream);border:.5px solid var(--border);border-radius:10px;padding:.8rem 1rem;color:var(--text-dark);font-size:.88rem;font-family:'DM Sans',sans-serif;outline:none;transition:border-color .2s, box-shadow .2s;}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--deep-green);box-shadow:0 0 0 3px rgba(26,58,47,.05);}
+.form-group textarea{resize:none;min-height:90px;}
+.intake-nav{display:flex;justify-content:space-between;align-items:center;margin-top:1.5rem;}
+.btn-back{background:transparent;border:.5px solid var(--border);color:var(--text-mid);padding:.65rem 1.5rem;border-radius:100px;font-size:.83rem;cursor:pointer;font-family:'DM Sans',sans-serif;}
+.btn-next{background:var(--deep-green);color:white;padding:.65rem 2rem;border-radius:100px;font-size:.83rem;font-weight:500;cursor:pointer;border:none;font-family:'DM Sans',sans-serif;transition:all .2s;}
+.btn-next:hover{background:var(--mid-green);}
+.result-card{background:var(--deep-green);border-radius:16px;padding:2rem;margin-top:1.5rem;}
+.result-heading{font-family:'Playfair Display',serif;font-size:1.2rem;color:white;margin-bottom:.4rem;}
+.result-sub{font-size:.8rem;color:rgba(255,255,255,.5);margin-bottom:1.5rem;}
+.result-providers{display:flex;flex-direction:column;gap:.75rem;margin-bottom:1.5rem;}
+.rp-card{background:rgba(255,255,255,.07);border:.5px solid rgba(255,255,255,.1);border-radius:12px;padding:1rem 1.25rem;display:flex;gap:.9rem;align-items:center;}
+.rp-av{width:38px;height:38px;border-radius:50%;background:rgba(201,168,76,.2);display:flex;align-items:center;justify-content:center;font-size:.78rem;color:var(--gold);font-family:'Playfair Display',serif;flex-shrink:0;}
+.rp-name{font-size:.85rem;font-weight:500;color:white;}
+.rp-role{font-size:.73rem;color:rgba(255,255,255,.45);margin-top:1px;}
+.rp-btn{margin-left:auto;background:var(--gold);color:white;border:none;border-radius:100px;padding:.35rem 1rem;font-size:.72rem;cursor:pointer;font-family:'DM Sans',sans-serif;white-space:nowrap;}
+.result-btns{display:flex;gap:.75rem;}
+.res-btn-o{flex:1;border:.5px solid rgba(255,255,255,.2);background:transparent;color:white;padding:.7rem;border-radius:100px;font-size:.8rem;cursor:pointer;font-family:'DM Sans',sans-serif;}
+.res-btn-f{flex:1;background:var(--gold);border:none;color:white;padding:.7rem;border-radius:100px;font-size:.8rem;cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:500;}
+
+
+
+/* COMMUNITY + EDUCATION */
+.ce-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.25rem;margin-top:3rem;}
+.ce-card{background:var(--warm-white);border:.5px solid var(--border);border-radius:18px;padding:2rem;transition:all .2s;}
+.ce-card:hover{transform:translateY(-2px);border-color:rgba(26,58,47,.22);box-shadow:0 12px 36px rgba(26,58,47,.07);}
+.ce-icon{font-size:1.3rem;margin-bottom:1rem;}
+.ce-title{font-size:1rem;font-weight:500;color:var(--deep-green);margin-bottom:.5rem;}
+.ce-desc{font-size:.83rem;color:var(--text-mid);line-height:1.7;font-weight:300;}
+.ce-list{margin-top:1rem;display:flex;flex-wrap:wrap;gap:6px;}
+.ce-chip{font-size:.68rem;padding:3px 10px;border-radius:100px;background:var(--cream);color:var(--text-mid);border:.5px solid var(--border);}
+.community-feed{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:3rem;}
+.feed-card{background:var(--cream);border:.5px solid var(--border);border-radius:16px;padding:1.4rem;}
+.feed-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:.7rem;}
+.feed-name{font-size:.82rem;font-weight:500;color:var(--deep-green);}
+.feed-meta{font-size:.68rem;color:var(--text-muted);}
+.feed-text{font-size:.8rem;color:var(--text-mid);line-height:1.7;font-weight:300;}
+.feed-actions{margin-top:1rem;font-size:.74rem;color:var(--gold);font-weight:500;}
+.edu-banner{background:var(--deep-green);border-radius:22px;padding:2.5rem;margin-top:3rem;color:white;}
+.edu-title{font-family:'Playfair Display',serif;font-size:1.6rem;margin-bottom:.6rem;}
+.edu-desc{font-size:.86rem;line-height:1.75;color:rgba(255,255,255,.65);max-width:720px;}
+.edu-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:1.5rem;}
+.edu-card{background:rgba(255,255,255,.06);border:.5px solid rgba(255,255,255,.1);border-radius:16px;padding:1.25rem;}
+.edu-kicker{font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-light);margin-bottom:.55rem;}
+.edu-card-title{font-size:.9rem;font-weight:500;color:white;margin-bottom:.45rem;}
+.edu-card-desc{font-size:.78rem;line-height:1.65;color:rgba(255,255,255,.58);}
+
+/* KHALIL POPUP */
+.khalil-fab{position:fixed;right:22px;bottom:22px;z-index:300;background:var(--deep-green);color:white;border:none;border-radius:999px;padding:.85rem 1.1rem;display:flex;align-items:center;gap:.65rem;box-shadow:0 16px 40px rgba(26,58,47,.22);cursor:pointer;font-family:'DM Sans',sans-serif;}
+.khalil-dot{width:10px;height:10px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 6px rgba(201,168,76,.15);}
+.khalil-label{font-size:.82rem;font-weight:500;}
+.khalil-modal{position:fixed;inset:0;background:rgba(15,35,24,.42);display:none;align-items:flex-end;justify-content:flex-end;z-index:350;padding:22px;}
+.khalil-modal.open{display:flex;}
+.khalil-panel{width:min(390px,calc(100vw - 24px));background:var(--warm-white);border-radius:22px;overflow:hidden;box-shadow:0 24px 70px rgba(15,35,24,.24);border:.5px solid var(--border);}
+.khalil-top{background:var(--deep-green);padding:1rem 1.1rem;display:flex;align-items:center;justify-content:space-between;}
+.khalil-top-left{display:flex;gap:.75rem;align-items:center;}
+.khalil-avatar{width:38px;height:38px;border-radius:50%;background:rgba(201,168,76,.2);display:flex;align-items:center;justify-content:center;color:var(--gold);font-family:'Playfair Display',serif;font-size:.86rem;}
+.khalil-name{font-size:.88rem;color:white;font-weight:500;}
+.khalil-status{font-size:.7rem;color:rgba(255,255,255,.52);}
+.khalil-close{background:transparent;border:none;color:rgba(255,255,255,.7);font-size:1.2rem;cursor:pointer;}
+.khalil-body{padding:1.1rem;display:flex;flex-direction:column;gap:.8rem;}
+.khalil-bubble{background:var(--cream);padding:.85rem 1rem;border-radius:16px;border-bottom-left-radius:5px;font-size:.82rem;line-height:1.65;color:var(--text-dark);}
+.khalil-options{display:flex;flex-wrap:wrap;gap:.55rem;}
+.khalil-pill{background:white;border:.5px solid var(--border);border-radius:999px;padding:.5rem .85rem;font-size:.76rem;color:var(--deep-green);cursor:pointer;}
+.khalil-cta-row{display:flex;gap:.7rem;margin-top:.25rem;}
+.khalil-primary,.khalil-secondary{flex:1;border-radius:999px;padding:.72rem .9rem;font-size:.8rem;font-family:'DM Sans',sans-serif;cursor:pointer;}
+.khalil-primary{border:none;background:var(--deep-green);color:white;font-weight:500;}
+.khalil-secondary{border:.5px solid var(--border);background:transparent;color:var(--text-mid);}
+
+
+/* IMPROVEMENTS */
+.urgent-bar{background:#fff7ef;border-bottom:1px solid rgba(201,168,76,.22);padding:.95rem 2rem;display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;align-items:center;}
+.urgent-title{font-size:.82rem;font-weight:600;color:var(--deep-green);}
+.urgent-copy{font-size:.78rem;color:var(--text-mid);}
+.urgent-btn{border:none;background:var(--deep-green);color:white;padding:.45rem 1rem;border-radius:999px;font-size:.74rem;cursor:pointer;}
+.hero-note{margin-top:1.1rem;font-size:.76rem;color:var(--text-muted);max-width:620px;line-height:1.7;opacity:0;animation:fadeUp .8s ease .72s forwards;}
+.quick-paths{background:var(--cream);}
+.qp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem;margin-top:2rem;}
+.qp-card{background:var(--warm-white);border:.5px solid var(--border);border-radius:18px;padding:1.6rem;box-shadow:0 10px 32px rgba(26,58,47,.04);}
+.qp-kicker{font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:.7rem;}
+.qp-title{font-size:1rem;font-weight:500;color:var(--deep-green);margin-bottom:.45rem;}
+.qp-desc{font-size:.82rem;color:var(--text-mid);line-height:1.65;font-weight:300;min-height:68px;}
+.qp-link{margin-top:1rem;color:var(--deep-green);font-size:.8rem;font-weight:500;cursor:pointer;}
+.trust-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:3rem;}
+.trust-card{background:var(--warm-white);border:.5px solid var(--border);border-radius:16px;padding:1.35rem;}
+.trust-card-title{font-size:.88rem;font-weight:500;color:var(--deep-green);margin-bottom:.4rem;}
+.trust-card-desc{font-size:.78rem;color:var(--text-mid);line-height:1.65;font-weight:300;}
+.match-visual{display:grid;grid-template-columns:repeat(5,1fr);gap:.9rem;margin-top:3rem;align-items:stretch;}
+.match-node{background:var(--warm-white);border:.5px solid var(--border);border-radius:16px;padding:1.2rem;position:relative;}
+.match-node:after{content:'→';position:absolute;right:-.62rem;top:50%;transform:translateY(-50%);color:var(--gold);font-size:1.1rem;}
+.match-node:last-child:after{display:none;}
+.match-step{font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:.55rem;}
+.match-title{font-size:.9rem;font-weight:500;color:var(--deep-green);margin-bottom:.35rem;}
+.match-desc{font-size:.77rem;color:var(--text-mid);line-height:1.6;font-weight:300;}
+.dashboard-strip{background:var(--deep-green);border-radius:22px;padding:2rem;margin-top:3rem;}
+.dashboard-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:.8rem;}
+.dash-item{background:rgba(255,255,255,.06);border:.5px solid rgba(255,255,255,.08);border-radius:14px;padding:1rem;}
+.dash-num{font-family:'Playfair Display',serif;color:var(--gold);font-size:1.35rem;}
+.dash-title{font-size:.8rem;color:white;font-weight:500;margin:.45rem 0 .3rem;}
+.dash-desc{font-size:.72rem;color:rgba(255,255,255,.56);line-height:1.55;}
+.safety-disclaimer{margin-top:1rem;font-size:.76rem;color:rgba(255,255,255,.5);line-height:1.7;}
+.filter-bar{display:grid;grid-template-columns:repeat(4,1fr);gap:.8rem;margin:2rem 0 1rem;}
+.filter-chip{background:var(--cream);border:.5px solid var(--border);border-radius:999px;padding:.7rem 1rem;font-size:.76rem;color:var(--text-mid);text-align:center;}
+.provider-meta{display:grid;grid-template-columns:repeat(2,1fr);gap:.5rem;margin-top:.9rem;}
+.provider-cell{background:var(--cream);border-radius:10px;padding:.55rem .7rem;}
+.provider-cell-label{font-size:.64rem;letter-spacing:.08em;text-transform:uppercase;color:var(--text-muted);margin-bottom:.18rem;}
+.provider-cell-value{font-size:.75rem;color:var(--deep-green);font-weight:500;}
+.provider-actions{display:flex;gap:.6rem;margin-top:1rem;}
+.provider-btn{border:none;border-radius:999px;padding:.55rem .95rem;font-size:.74rem;cursor:pointer;font-family:'DM Sans',sans-serif;}
+.provider-btn.primary{background:var(--deep-green);color:white;}
+.provider-btn.secondary{background:transparent;border:.5px solid var(--border);color:var(--deep-green);}
+.onboard-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.1rem;margin-top:2rem;}
+.onboard-card{background:var(--cream);border:.5px solid var(--border);border-radius:18px;padding:1.5rem;}
+.safe-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:2rem;}
+.safe-card{background:var(--warm-white);border:.5px solid var(--border);border-radius:16px;padding:1.35rem;}
+.safe-title{font-size:.9rem;font-weight:500;color:var(--deep-green);margin-bottom:.35rem;}
+.safe-desc{font-size:.78rem;color:var(--text-mid);line-height:1.65;font-weight:300;}
+.community-rules{display:grid;grid-template-columns:repeat(4,1fr);gap:.9rem;margin:2.2rem 0 0;}
+.rule-card{background:var(--cream);border:.5px solid var(--border);border-radius:16px;padding:1.15rem;}
+.rule-title{font-size:.82rem;font-weight:500;color:var(--deep-green);margin-bottom:.35rem;}
+.rule-desc{font-size:.76rem;color:var(--text-mid);line-height:1.6;}
+.edu-roadmap{display:grid;grid-template-columns:repeat(4,1fr);gap:.9rem;margin-top:2rem;}
+.road-card{background:var(--warm-white);border:.5px solid var(--border);border-radius:16px;padding:1.2rem;}
+.road-kicker{font-size:.67rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:.45rem;}
+.fallback-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:1rem;margin-top:2rem;}
+.fallback-panel{background:var(--cream);border:.5px solid var(--border);border-radius:18px;padding:1.6rem;}
+.check-list{display:flex;flex-direction:column;gap:.65rem;margin-top:1rem;}
+.check-item{font-size:.8rem;color:var(--text-mid);line-height:1.55;display:flex;gap:.55rem;}
+.check-item b{color:var(--deep-green);}
+.aid-banner{background:linear-gradient(135deg,var(--deep-green),#254b3d);color:white;border-radius:20px;padding:2rem;margin-top:2.2rem;}
+.aid-points{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem;margin-top:1rem;}
+.aid-point{background:rgba(255,255,255,.06);border:.5px solid rgba(255,255,255,.1);border-radius:14px;padding:1rem;}
+.crisis-card{background:#fff7ef;border:.5px solid rgba(201,168,76,.25);border-radius:18px;padding:1.25rem;margin-bottom:1.5rem;}
+.anon-row{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;}
+.result-insights{display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem;margin:1rem 0 1.2rem;}
+.result-mini{background:rgba(255,255,255,.07);border:.5px solid rgba(255,255,255,.1);border-radius:12px;padding:.85rem;}
+.result-mini-label{font-size:.64rem;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:.28rem;}
+.result-mini-value{font-size:.79rem;color:white;font-weight:500;line-height:1.45;}
+.survey-preview{background:var(--cream);border:.5px solid var(--border);border-radius:16px;padding:1.35rem;margin-top:1.35rem;}
+.survey-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.75rem;margin-top:.9rem;}
+.survey-item{font-size:.78rem;color:var(--text-mid);background:var(--warm-white);border:.5px solid var(--border);border-radius:12px;padding:.9rem;}
+.badge-inline{display:inline-block;font-size:.67rem;padding:3px 8px;border-radius:999px;background:var(--gold-pale);color:#8a6a1a;border:.5px solid var(--border-gold);margin-left:.45rem;vertical-align:middle;}
+@media(max-width:768px){.qp-grid,.trust-grid,.match-visual,.dashboard-grid,.filter-bar,.onboard-grid,.safe-grid,.community-rules,.edu-roadmap,.fallback-grid,.aid-points,.result-insights,.anon-row,.survey-grid{grid-template-columns:1fr;}.match-node:after{display:none;}}
+
+/* COMPARISON TABLE */
+.compare-section{background:var(--warm-white);}
+.compare-wrap{margin-top:3rem;border-radius:20px;overflow:hidden;border:.5px solid var(--border);box-shadow:0 20px 56px rgba(26,58,47,.07);}
+.compare-header{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;background:var(--deep-green);}
+.compare-col-head{padding:1.25rem 1.1rem;font-size:.78rem;font-weight:500;color:rgba(255,255,255,.9);letter-spacing:.04em;}
+.compare-col-head.sakinah{background:rgba(201,168,76,.18);border-left:.5px solid rgba(201,168,76,.35);}
+.compare-col-head.sakinah .col-label{color:var(--gold);font-family:'Playfair Display',serif;font-size:1rem;font-weight:400;font-style:italic;}
+.compare-row{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;border-top:.5px solid var(--border);}
+.compare-row:nth-child(even){background:var(--cream);}
+.compare-cell{padding:1rem 1.1rem;font-size:.82rem;color:var(--text-mid);line-height:1.55;border-left:.5px solid var(--border);display:flex;align-items:center;gap:.5rem;}
+.compare-cell:first-child{border-left:none;font-weight:500;color:var(--text-dark);font-size:.82rem;}
+.compare-cell.sakinah{background:rgba(201,168,76,.05);border-left:.5px solid rgba(201,168,76,.2);color:var(--deep-green);font-weight:500;}
+.tick{color:#2D8A5C;font-size:1rem;flex-shrink:0;}
+.cross{color:#C0392B;font-size:1rem;flex-shrink:0;}
+.partial{color:var(--gold);font-size:.9rem;flex-shrink:0;}
+
+/* AI ANSWER ENGINE */
+.ai-engine-section{background:var(--deep-green);}
+.ai-engine-demo{background:rgba(255,255,255,.05);border:.5px solid rgba(255,255,255,.12);border-radius:20px;padding:2rem;margin-top:2.5rem;max-width:700px;}
+.ai-search-bar{background:rgba(255,255,255,.08);border:.5px solid rgba(255,255,255,.18);border-radius:12px;padding:1rem 1.25rem;display:flex;align-items:center;gap:.75rem;margin-bottom:1.5rem;}
+.ai-search-icon{color:var(--gold);font-size:1rem;}
+.ai-search-text{font-size:.88rem;color:rgba(255,255,255,.8);font-style:italic;}
+.ai-answer-card{background:rgba(255,255,255,.07);border:.5px solid rgba(255,255,255,.1);border-radius:14px;padding:1.25rem;margin-bottom:.75rem;}
+.ai-answer-source{font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem;}
+.ai-answer-text{font-size:.83rem;color:rgba(255,255,255,.85);line-height:1.65;}
+.ai-answer-link{font-size:.75rem;color:rgba(255,255,255,.4);margin-top:.5rem;}
+.ai-next-step{background:var(--gold);border-radius:12px;padding:1rem 1.25rem;display:flex;align-items:center;justify-content:space-between;margin-top:1rem;}
+.ai-next-label{font-size:.78rem;color:rgba(255,255,255,.8);}
+.ai-next-action{font-size:.85rem;font-weight:500;color:white;}
+.ai-sources-note{font-size:.74rem;color:rgba(255,255,255,.35);margin-top:1.25rem;line-height:1.65;}
+
+/* SCHOLARSHIP PAGE */
+.scholarship-hero{background:linear-gradient(135deg,var(--deep-green) 0%,#1a4a35 60%,#0f2318 100%);padding:8rem 2rem 5rem;text-align:center;}
+.scholarship-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin-top:3rem;}
+.schol-card{background:var(--warm-white);border:.5px solid var(--border);border-radius:18px;padding:2rem;box-shadow:0 12px 36px rgba(26,58,47,.06);}
+.schol-icon{font-size:1.4rem;margin-bottom:1rem;}
+.schol-title{font-size:.95rem;font-weight:500;color:var(--deep-green);margin-bottom:.45rem;}
+.schol-desc{font-size:.82rem;color:var(--text-mid);line-height:1.65;font-weight:300;}
+.schol-form{background:var(--cream);border:.5px solid var(--border);border-radius:20px;padding:2.5rem;max-width:640px;margin:3rem auto 0;}
+.schol-steps{display:flex;flex-direction:column;gap:0;margin-top:2.5rem;}
+.schol-step{display:flex;gap:1.25rem;padding:1.5rem 0;border-bottom:.5px solid var(--border);align-items:flex-start;}
+.schol-step:first-child{border-top:.5px solid var(--border);}
+.schol-num{font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--gold);flex-shrink:0;width:26px;}
+.schol-step-title{font-size:.9rem;font-weight:500;color:var(--deep-green);margin-bottom:.3rem;}
+.schol-step-desc{font-size:.8rem;color:var(--text-mid);line-height:1.6;font-weight:300;}
+.fund-sources{display:grid;grid-template-columns:repeat(4,1fr);gap:.9rem;margin-top:2rem;}
+.fund-src{background:rgba(255,255,255,.06);border:.5px solid rgba(255,255,255,.1);border-radius:14px;padding:1rem;text-align:center;}
+.fund-src-label{font-size:.72rem;color:rgba(255,255,255,.45);margin-top:.4rem;}
+.fund-src-name{font-size:.86rem;font-weight:500;color:white;}
+@media(max-width:768px){.compare-header,.compare-row{grid-template-columns:1fr;}.compare-col-head:not(:first-child),.compare-cell:not(:first-child){display:none;}.compare-col-head.sakinah,.compare-cell.sakinah{display:flex;}.scholarship-grid,.schol-steps,.fund-sources{grid-template-columns:1fr;}}
+
+footer{background:#0F2318;padding:3rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.5rem;}
+.footer-logo{font-family:'Playfair Display',serif;font-size:1.2rem;color:white;}
+.footer-logo span{color:var(--gold);font-style:italic;}
+.footer-links{display:flex;gap:2rem;flex-wrap:wrap;}
+.footer-links a{font-size:.78rem;color:rgba(255,255,255,.35);text-decoration:none;transition:color .2s;cursor:pointer;}
+.footer-links a:hover{color:rgba(255,255,255,.75);}
+.footer-copy{font-size:.72rem;color:rgba(255,255,255,.22);}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+
+@media(max-width:768px){
+  nav{padding:1rem 1.25rem;}.nav-links{display:none;}
+  section{padding:4rem 1.25rem;}
+  .problem-grid,.cond-grid,.stories-grid,.path-grid,.prov-grid,.lib-grid,.ts-grid,.ce-grid,.community-feed,.edu-cards{grid-template-columns:1fr;}
+  .trust-bar{gap:1.25rem;padding:1rem 1.25rem;}
+  footer{flex-direction:column;text-align:center;}
+  .option-grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo" onclick="showPage('home')">Saki<span>nah</span></div>
+  <div class="nav-links">
+    <a onclick="scrollTo('how')">How it works</a>
+    <a onclick="scrollTo('conditions')">Conditions</a>
+    <a onclick="showPage('library')">Guidance library</a>
+    <a onclick="showPage('fallback')">Fallback care</a>
+    <a onclick="showPage('community')">Community</a>
+    <a onclick="showPage('providers')">Providers</a>
+    <a onclick="showPage('scholarship')">Scholarship</a>
+    <a onclick="showPage('ai-answers')">Ask a question</a>
+    <a onclick="showPage('intake')" class="nav-cta">Get support</a>
+  </div>
+</nav>
+
+<!-- ══ HOME ══ -->
+<div id="page-home" class="page active">
+<div class="urgent-bar">
+  <div class="urgent-title">Need urgent help?</div>
+  <div class="urgent-copy">Sakinah is for non-emergency support. If you may harm yourself or someone else, contact local emergency services or a crisis hotline now.</div>
+  <button class="urgent-btn" onclick="showPage('crisis')">Get crisis support</button>
+</div>
+
+
+<section class="hero">
+  <div class="hero-bg-pattern"></div>
+  <div class="hero-arabic">سكينة</div>
+  <div class="hero-eyebrow">Muslim mental health support</div>
+  <h1 class="hero-title">Faith-aligned mental health support<br>for <em>Muslims</em></h1>
+  <p class="hero-sub">Find Muslim providers, scholar-informed guidance, trusted fallback care, and community support in one guided platform that respects your deen.</p>
+  <div class="hero-btns">
+    <button class="btn-primary" onclick="showPage('intake')">Get started</button>
+    <button class="btn-outline" onclick="scrollTo('how')">Explore support</button>
+  </div>
+  <div class="hero-note">Khalil is an AI intake and matching assistant — not a therapist, emergency service, or mufti. Clinical care is provided by licensed professionals, and Islamic guidance comes from qualified scholars.</div><div class="hero-scroll"><div class="scroll-line"></div><span>scroll</span></div>
+</section>
+
+<div class="trust-bar">
+  <div class="trust-item"><div class="trust-dot"></div>Shariah-compliant guidance</div>
+  <div class="trust-item"><div class="trust-dot"></div>Scholar-informed guidance</div>
+  <div class="trust-item"><div class="trust-dot"></div>Muslim & Muslim-aware therapists</div>
+  <div class="trust-item"><div class="trust-dot"></div>Privacy-first intake</div>
+  <div class="trust-item"><div class="trust-dot"></div>Financial aid available</div>
+</div>
+
+<section>
+<div class="container">
+  <div class="s-label"> </div>
+  <h2 class="s-title">Many Muslims suffer in <em>silence</em></h2>
+  <p class="s-desc">Finding mental health support that respects your beliefs shouldn't be this hard — but for most Muslims, it is.</p>
+  <div class="problem-grid reveal">
+    <div class="problem-pills">
+      <div class="prob-pill"><div class="prob-icon">🕌</div><div><div class="prob-title">Therapy that doesn't understand deen</div><div class="prob-desc">Most therapists have no training in Islamic values, leading to advice that conflicts with shariah — or that pathologises faith itself.</div></div></div>
+      <div class="prob-pill"><div class="prob-icon">🤫</div><div><div class="prob-title">Stigma within the community</div><div class="prob-desc">Mental illness is often dismissed as weak iman or lack of tawakkul, preventing Muslims from seeking the help they need.</div></div></div>
+      <div class="prob-pill"><div class="prob-icon">🌀</div><div><div class="prob-title">Confusion between waswas and clinical conditions</div><div class="prob-desc">OCD is frequently misidentified as spiritual weakness. Muslims are told to "just make more dua" — advice that can actively worsen clinical OCD.</div></div></div>
+      <div class="prob-pill"><div class="prob-icon">⏳</div><div><div class="prob-title">Days-long waits, no joined-up care</div><div class="prob-desc">Fragmented systems leave Muslims waiting days for a fatwa — with no connection to clinical care on the other end.</div></div></div>
+    </div>
+    <div class="problem-quote">
+      <div class="pq-label">Quranic foundation</div>
+      <div class="pq-text" style="color: var(--gold-light); font-style: normal; direction: rtl; font-size: clamp(1.3rem,2.8vw,1.9rem); line-height: 1.9;">وَتَطْمَئِنُّ قُلُوبُهُم بِذِكْرِ اللَّهِ ۗ أَلَا بِذِكْرِ اللَّهِ تَطْمَئِنُّ الْقُلُوبُ</div>
+      <div class="pq-source">“Verily, in the remembrance of Allah do hearts find rest.” — Surah Ar-Ra'd, 13:28</div>
+      <div class="pq-stats">
+        <div><div class="pq-stat-num">1.8B</div><div class="pq-stat-label">Muslims worldwide</div></div>
+        <div><div class="pq-stat-num">~3%</div><div class="pq-stat-label">Muslim behavioural therapists</div></div>
+        <div><div class="pq-stat-num">0</div><div class="pq-stat-label">Platforms like Sakinah</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+
+<!-- PROBLEM -->
+<section class="quick-paths">
+  <div class="container">
+    <div class="s-label">Choose your path</div>
+    <h2 class="s-title">Four ways to start <em>today</em></h2>
+    <p class="s-desc">Some users are ready to book care. Others need an answer first. Others need financial support, or community and learning before the next step.</p>
+    <div class="qp-grid reveal" style="grid-template-columns:repeat(4,1fr);">
+      <div class="qp-card"><div class="qp-kicker">Path 01</div><div class="qp-title">Ask a question</div><div class="qp-desc">Get an AI-matched answer from vetted Islamic and clinical sources — instantly. Then get guided toward the right care path.</div><div class="qp-link" onclick="showPage('ai-answers')">Ask now →</div></div>
+      <div class="qp-card"><div class="qp-kicker">Path 02</div><div class="qp-title">Find a Muslim provider</div><div class="qp-desc">Start your profile, share your preferences, and get matched by specialty, insurance, language, gender, location, and care style.</div><div class="qp-link" onclick="showPage('intake')">Start matching →</div></div>
+      <div class="qp-card"><div class="qp-kicker">Path 03</div><div class="qp-title">Apply for scholarship</div><div class="qp-desc">If cost is the only barrier, Sakinah's zakat-funded scholarship programme covers or subsidises care. Apply in minutes.</div><div class="qp-link" onclick="showPage('scholarship')">Apply for aid →</div></div>
+      <div class="qp-card"><div class="qp-kicker">Path 04</div><div class="qp-title">Join community & learning</div><div class="qp-desc">Read stories, ask moderated questions, and explore prophetic and companion-based lessons on grief, resilience, anxiety, and healing.</div><div class="qp-link" onclick="showPage('community')">Explore community →</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- AYAH -->
+<div class="ayah-banner">
+  <div class="ayah-arabic">وَنُنَزِّلُ مِنَ ٱلْقُرْءَانِ مَا هُوَ شِفَآءٌ</div>
+  <div class="ayah-text">"And We send down from the Quran that which is a healing and a mercy for the believers."</div>
+  <div class="ayah-ref">Surah Al-Isra, 17:82</div>
+</div>
+
+<!-- HOW -->
+<section class="how" id="how">
+<div class="container">
+  <div class="s-label">How it works</div>
+  <h2 class="s-title">Your path to <em>wholeness</em></h2>
+  <p class="s-desc">Sakinah bridges the gap between Islamic scholarship and clinical care — so you never have to choose between your faith and your healing.</p>
+  <div class="flow-steps reveal">
+    <div class="flow-step"><div class="flow-num">01</div><div><div class="flow-title">Select your concern</div><div class="flow-desc">Tell us what you're experiencing — OCD, ADHD, Tourette's, anxiety, depression, or more. Choose your language and gender preference. Everything is private.</div></div></div>
+    <div class="flow-step"><div class="flow-num">02</div><div><div class="flow-title">Choose your preferences</div><div class="flow-desc">Select whether you want Islamic guidance, clinical matching, or both. We tailor the pathway to exactly what you need.</div></div></div>
+    <div class="flow-step"><div class="flow-num">03</div><div><div class="flow-title">Get matched and receive Islamic guidance</div><div class="flow-desc">Connected to a scholar versed in both fiqh and your specific condition. They provide a personalised Islamic guiding document — your framework — from anywhere in the world.</div></div></div>
+    <div class="flow-step"><div class="flow-num">04</div><div><div class="flow-title">Connect with a therapist</div><div class="flow-desc">Matched to a Muslim or Muslim-aware behavioural therapist. Your Islamic guidance becomes the clinical guiding principle of your treatment plan.</div></div></div>
+    <div class="flow-step"><div class="flow-num">05</div><div><div class="flow-title">No match available? We still help.</div><div class="flow-desc">Financial scholarships through zakat and donations — or simply your Islamic framework document to bring to any provider worldwide. No one leaves empty-handed.</div></div></div>
+  </div>
+</div>
+</section>
+
+<!-- CONDITIONS -->
+<section id="conditions">
+<div class="container">
+  <div class="s-label">Who we serve</div>
+  <h2 class="s-title">Conditions we <em>specialise</em> in</h2>
+  <p class="s-desc">We focus on conditions frequently misunderstood through an Islamic lens — where the gap between faith and clinical care is widest.</p>
+  <div class="cond-grid reveal">
+    <div class="cond-card"><div class="cond-icon">🧠</div><div class="cond-title">OCD & Waswas</div><div class="cond-desc">OCD is deeply intertwined with the Islamic concept of waswas. Scholars versed in both help distinguish religious scrupulosity from clinical OCD — and align ERP therapy with Islamic rulings.</div><div class="cond-tags"><span class="ctag">waswas</span><span class="ctag">scrupulosity</span><span class="ctag">ERP-aligned</span></div></div>
+    <div class="cond-card"><div class="cond-icon">⚡</div><div class="cond-title">ADHD</div><div class="cond-desc">Understanding ADHD within an Islamic framework — from prayer focus to fasting — with guidance on medication rulings, accommodations, and faith-based strategies.</div><div class="cond-tags"><span class="ctag">focus in salah</span><span class="ctag">medication rulings</span><span class="ctag">neurodivergence</span></div></div>
+    <div class="cond-card"><div class="cond-icon">🌊</div><div class="cond-title">Tourette's Syndrome</div><div class="cond-desc">Guidance on tics during salah, wudu, and fasting. Scholars establish what is excused under fiqh — reducing shame, confusion, and self-blame.</div><div class="cond-tags"><span class="ctag">tics in salah</span><span class="ctag">fiqh of illness</span></div></div>
+    <div class="cond-card"><div class="cond-icon">💭</div><div class="cond-title">Anxiety & Depression</div><div class="cond-desc">Faith-informed approaches that honour both the spiritual and clinical dimensions of mental suffering — without shame, stigma, or spiritual bypass.</div><div class="cond-tags"><span class="ctag">stigma-free</span><span class="ctag">CBT-aligned</span><span class="ctag">tawakkul</span></div></div>
+    <div class="cond-card"><div class="cond-icon">🤲</div><div class="cond-title">Grief & Trauma</div><div class="cond-desc">Processing loss, trauma, and PTSD through the lens of sabr, tawakkul, and Islamic meaning-making — integrated with evidence-based trauma therapies.</div><div class="cond-tags"><span class="ctag">sabr</span><span class="ctag">PTSD</span><span class="ctag">grief</span></div></div>
+    <div class="cond-card"><div class="cond-icon">🌙</div><div class="cond-title">Postpartum & More</div><div class="cond-desc">Postpartum depression, marital challenges, addiction recovery, and eating disorders — addressed with Islamic sensitivity and clinical rigour.</div><div class="cond-tags"><span class="ctag">postpartum</span><span class="ctag">addiction</span><span class="ctag">marriage</span></div></div>
+  </div>
+</div>
+</section>
+
+<!-- PATHWAYS -->
+<section>
+<div class="container">
+  <div class="s-label">Support pathways</div>
+  <h2 class="s-title">No one leaves <em>without</em> help</h2>
+  <p class="s-desc">Whether or not a matched provider is available, Sakinah ensures every Muslim walks away with something meaningful.</p>
+  <div class="path-grid reveal" style="grid-template-columns:repeat(4,1fr);">
+    <div class="path-card"><div class="path-num">01</div><div class="path-title">Ask a question first</div><div class="path-desc">Let Khalil find the answer to your question from vetted Islamic and clinical sources — before you even need to book anything.</div><div class="path-link" onclick="showPage('ai-answers')">Ask now →</div></div>
+    <div class="path-card"><div class="path-num">02</div><div class="path-title">Full matched care</div><div class="path-desc">Matched to a scholar and Muslim or Muslim-aware therapist. Scholar provides your fatwa. Therapist builds your treatment plan around it.</div><div class="path-link" onclick="showPage('intake')">Begin matching →</div></div>
+    <div class="path-card feat"><div class="path-badge">Finance barrier? Start here</div><div class="path-num">03</div><div class="path-title">Financial scholarship</div><div class="path-desc">If cost is a barrier, Sakinah's scholarship fund — supported by zakat and donations — subsidises or fully covers access to care for those who need it.</div><div class="path-link" onclick="showPage('scholarship')">Apply for scholarship →</div></div>
+    <div class="path-card"><div class="path-num">04</div><div class="path-title">Community & education</div><div class="path-desc">Join a moderated community space, learn from shared stories, and explore educational reflections from the Prophet ﷺ and the Sahabah on resilience, grief, patience, and healing.</div><div class="path-link" onclick="showPage('community')">Explore community →</div></div>
+  </div>
+</div>
+</section>
+
+<!-- COMPARISON TABLE -->
+<section class="compare-section">
+  <div class="container">
+    <div class="s-label">Why Sakinah</div>
+    <h2 class="s-title">Not just another <em>mental health app</em></h2>
+    <p class="s-desc">Sakinah is not a Muslim-branded BetterHelp. It is a platform purpose-built for the specific intersection of Islamic scholarship and clinical mental health care — with scholar oversight, financial aid, and community at its core.</p>
+    <div class="compare-wrap reveal">
+      <div class="compare-header">
+        <div class="compare-col-head">Feature</div>
+        <div class="compare-col-head sakinah"><div class="col-label">Sakinah</div></div>
+        <div class="compare-col-head">Mainstream apps<br><span style="color:rgba(255,255,255,.45);font-size:.7rem;">(BetterHelp, etc.)</span></div>
+        <div class="compare-col-head">General Islamic sites<br><span style="color:rgba(255,255,255,.45);font-size:.7rem;">(fatwa portals, etc.)</span></div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-cell">Muslim & Muslim-aware therapists</div>
+        <div class="compare-cell sakinah"><span class="tick">✓</span> Vetted network</div>
+        <div class="compare-cell"><span class="partial">~</span> Some, no vetting</div>
+        <div class="compare-cell"><span class="cross">✗</span> Not offered</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-cell">Scholar-informed Islamic guidance</div>
+        <div class="compare-cell sakinah"><span class="tick">✓</span> Integrated into care</div>
+        <div class="compare-cell"><span class="cross">✗</span> Not offered</div>
+        <div class="compare-cell"><span class="partial">~</span> Isolated fatwas</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-cell">AI that surfaces existing answers</div>
+        <div class="compare-cell sakinah"><span class="tick">✓</span> Finds vetted Q&A fast</div>
+        <div class="compare-cell"><span class="cross">✗</span> Generic chatbot</div>
+        <div class="compare-cell"><span class="cross">✗</span> Manual search only</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-cell">Financial scholarship / zakat aid</div>
+        <div class="compare-cell sakinah"><span class="tick">✓</span> Built-in, no dead ends</div>
+        <div class="compare-cell"><span class="cross">✗</span> Pay or leave</div>
+        <div class="compare-cell"><span class="cross">✗</span> Not applicable</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-cell">Fallback care if no Muslim provider</div>
+        <div class="compare-cell sakinah"><span class="tick">✓</span> Guidance doc + backup</div>
+        <div class="compare-cell"><span class="cross">✗</span> Match or nothing</div>
+        <div class="compare-cell"><span class="cross">✗</span> Not offered</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-cell">Moderated faith-sensitive community</div>
+        <div class="compare-cell sakinah"><span class="tick">✓</span> Peer + scholar oversight</div>
+        <div class="compare-cell"><span class="cross">✗</span> Generic forums</div>
+        <div class="compare-cell"><span class="partial">~</span> Unmoderated</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-cell">Scholar + clinician coordination</div>
+        <div class="compare-cell sakinah"><span class="tick">✓</span> Joined-up from intake</div>
+        <div class="compare-cell"><span class="cross">✗</span> Separate systems</div>
+        <div class="compare-cell"><span class="cross">✗</span> Not offered</div>
+      </div>
+      <div class="compare-row" style="border-bottom:none;">
+        <div class="compare-cell">Free to access core features</div>
+        <div class="compare-cell sakinah"><span class="tick">✓</span> Scholarship covers gaps</div>
+        <div class="compare-cell"><span class="cross">✗</span> Subscription required</div>
+        <div class="compare-cell"><span class="tick">✓</span> Free content only</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STORIES -->
+<section class="stories">
+<div class="container">
+  <div class="s-label">Success stories</div>
+  <h2 class="s-title">Real journeys, <em>real healing</em></h2>
+  <p class="s-desc">Personas are illustrative, representing the many Muslims who struggle in silence — and what Sakinah is built to change.</p>
+  <div class="stories-grid reveal">
+    <div class="story-card">
+      <div class="story-avatar av-teal">F</div>
+      <div class="story-name">Fatima, 21</div>
+      <div class="story-tag">OCD & Waswas</div>
+      <div class="story-struggle">Struggled with intrusive thoughts during salah and felt overwhelming guilt — believing her iman was weak. She avoided seeking help, fearing she would be told to "just make more dua."</div>
+      <div class="story-qmark">"</div>
+      <div class="story-result">I realised I wasn't weak in faith. I needed help — and Islam fully supports that. The scholar explained OCD was not a spiritual failing. That changed everything.</div>
+    </div>
+    <div class="story-card">
+      <div class="story-avatar av-gold">A</div>
+      <div class="story-name">Amina, 24</div>
+      <div class="story-tag">ADHD</div>
+      <div class="story-struggle">Struggled with focus in prayer and daily tasks, labelled "lazy" by family. Undiagnosed for years because ADHD "didn't seem like a Muslim problem." She blamed herself constantly.</div>
+      <div class="story-qmark">"</div>
+      <div class="story-result">I stopped blaming myself and started working with how Allah created me. The fatwa on ADHD and ibadah freed me from years of guilt. My therapist built my plan around it.</div>
+    </div>
+    <div class="story-card">
+      <div class="story-avatar av-sage">Y</div>
+      <div class="story-name">Yusuf, 27</div>
+      <div class="story-tag">Anxiety</div>
+      <div class="story-struggle">Avoided therapy for years out of fear it would conflict with his deen. Multiple therapists dismissed his religious concerns or gave advice that felt deeply un-Islamic.</div>
+      <div class="story-qmark">"</div>
+      <div class="story-result">For the first time, I didn't feel like I had to separate my faith from healing. I brought my Sakinah guidance to my therapist and it transformed the entire conversation.</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- CHAT -->
+<section style="background:var(--cream);">
+<div class="container">
+  <div class="s-label">Support chat</div>
+  <h2 class="s-title">A gentle <em>first step</em></h2>
+  <p class="s-desc">Not ready for a full consultation? Start with our support chat — at your own pace, on your own terms.</p>
+  <div class="chat-window reveal">
+    <div class="chat-header"><div class="chat-av">S</div><div><div class="chat-name">Sakinah Support</div><div class="chat-status">Online · responds quickly</div></div></div>
+    <div class="chat-body">
+      <div class="msg msg-bot"><div class="msg-bubble">As-salamu alaykum. Welcome to Sakinah. I'm here to help you find the right support. What's on your mind today?</div><div class="msg-time">Now</div></div>
+      <div class="msg msg-user"><div class="msg-bubble">I have intrusive thoughts during prayer and I don't know if it's a sin or a mental health issue</div><div class="msg-time">Now</div></div>
+      <div class="msg msg-bot"><div class="msg-bubble">JazakAllahu khayran for trusting us with this. Intrusive thoughts during salah are very common and are often a sign of OCD — not weak iman. Our scholars have specific guidance on this. Would you like to be matched with a scholar who specialises in OCD and waswas?</div><div class="msg-time">Now</div></div>
+    </div>
+    <div class="chat-prompts">
+      <div class="chat-prompt">I feel anxious</div>
+      <div class="chat-prompt">I have intrusive thoughts</div>
+      <div class="chat-prompt">I need help focusing in salah</div>
+      <div class="chat-prompt">I'm not sure what I have</div>
+    </div>
+    <div class="chat-input-row"><input class="chat-input" placeholder="Type your message..."><button class="chat-send">Send</button></div>
+  </div>
+</div>
+</section>
+
+<!-- TRUST & SAFETY -->
+<section class="ts-section">
+<div class="container">
+  <div class="s-label" style="color:var(--gold-light);">Trust & safety</div>
+  <h2 class="s-title" style="color:white;">Your safety is our <em style="color:var(--gold)">priority</em></h2>
+  <p class="s-desc" style="color:rgba(255,255,255,.6);">Sakinah is a bridge to care — not a replacement for it.</p>
+  <div class="ts-grid reveal">
+    <div class="ts-card"><div class="ts-icon">🔒</div><div class="ts-title">Privacy-first</div><div class="ts-desc">Your information is confidential. We never share your details without your explicit consent.</div></div>
+    
+    <div class="ts-card"><div class="ts-icon">✅</div><div class="ts-title">Vetted providers only</div><div class="ts-desc">All scholars and therapists are individually vetted for professional credentials and Islamic literacy.</div></div>
+    <div class="ts-card"><div class="ts-icon">🌍</div><div class="ts-title">Financial aid available mission</div><div class="ts-desc">Funded by grants, zakat-eligible donations, and community support — never advertising or data sales.</div></div>
+    <div class="ts-card"><div class="ts-icon">🤝</div><div class="ts-title">Volunteer network</div><div class="ts-desc">Many scholars and therapists volunteer their time. Are you a provider? Apply to join the network.</div></div>
+    <div class="ts-card"><div class="ts-icon">📋</div><div class="ts-title">Scholarship access</div><div class="ts-desc">No Muslim should be unable to access support due to cost. Our zakat-funded programme covers care for those who need it.</div></div>
+  </div>
+</div>
+</section>
+
+<!-- CTA -->
+<section style="text-align:center;background:var(--cream);">
+<div class="container">
+  <div class="s-label" style="text-align:center;">Begin your journey</div>
+  <h2 class="s-title" style="text-align:center;max-width:600px;margin:0 auto 1rem;">Your faith is not a barrier to healing.<br><em>It is the foundation.</em></h2>
+  <p class="s-desc" style="text-align:center;margin:0 auto 2.5rem;">Take the first step. It is free to start, and no one will judge your struggle.</p>
+  <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+    <button class="btn-primary" onclick="showPage('intake')">Get matched now</button>
+    <button class="btn-outline" onclick="showPage('library')">Explore guidance library</button>
+  </div>
+</div>
+</section>
+
+</div><!-- end home -->
+
+<!-- ══ INTAKE ══ -->
+<div id="page-intake" class="page">
+<section style="padding-top:8rem;background:var(--cream);">
+<div class="container">
+  <div class="s-label">Get support</div>
+  <h2 class="s-title">Begin your <em>journey</em></h2>
+  <p class="s-desc">Answer a few questions so we can match you with the right support. Takes 2 minutes. Completely private.</p>
+  <div class="intake-wrap">
+    <div class="crisis-card"><div class="trust-card-title">Before you continue</div><div class="trust-card-desc">If you are in immediate danger, hearing commands to hurt yourself, or feel unable to stay safe, use the crisis support page instead of standard intake.</div><div class="provider-actions" style="margin-top:.9rem;"><button class="provider-btn primary" onclick="showPage('crisis')">Urgent support</button><button class="provider-btn secondary" onclick="openKhalil()">Ask Khalil</button></div></div>
+    <div class="intake-progress">
+      <div class="prog-step"><div class="prog-dot active" id="pd1">1</div><div class="prog-line" id="pl1"></div></div>
+      <div class="prog-step"><div class="prog-dot pending" id="pd2">2</div><div class="prog-line" id="pl2"></div></div>
+      <div class="prog-step"><div class="prog-dot pending" id="pd3">3</div><div class="prog-line" id="pl3"></div></div>
+      <div class="prog-step"><div class="prog-dot pending" id="pd4">4</div></div>
+    </div>
+    <div class="intake-card">
+      <!-- step 1 -->
+      <div class="intake-step active" id="step1">
+        <div class="intake-q">What are you experiencing?</div>
+        <div class="intake-sub">Select the condition that best describes your concern.</div>
+        <div class="option-grid">
+          <button class="option-btn" onclick="selectOpt(this)"><div class="opt-title">OCD / Waswas</div><div class="opt-sub">Intrusive thoughts, compulsions, scrupulosity</div></button>
+          <button class="option-btn" onclick="selectOpt(this)"><div class="opt-title">ADHD</div><div class="opt-sub">Focus, impulsivity, restlessness</div></button>
+          <button class="option-btn" onclick="selectOpt(this)"><div class="opt-title">Tourette's Syndrome</div><div class="opt-sub">Tics, involuntary movements or sounds</div></button>
+          <button class="option-btn" onclick="selectOpt(this)"><div class="opt-title">Anxiety</div><div class="opt-sub">Worry, panic, social anxiety</div></button>
+          <button class="option-btn" onclick="selectOpt(this)"><div class="opt-title">Depression</div><div class="opt-sub">Low mood, loss of motivation</div></button>
+          <button class="option-btn" onclick="selectOpt(this)"><div class="opt-title">I'm not sure</div><div class="opt-sub">Help me understand what I'm going through</div></button>
+        </div>
+        <div class="intake-nav"><span></span><button class="btn-next" onclick="goStep(2)">Continue →</button></div>
+      </div>
+      <!-- step 2 -->
+      <div class="intake-step" id="step2">
+        <div class="intake-q">Your preferences</div>
+        <div class="intake-sub">Help us find the right match for you.</div>
+        <div class="form-group"><label>Preferred provider gender</label><select><option>No preference</option><option>Female</option><option>Male</option></select></div>
+        <div class="form-group"><label>Preferred language</label><select><option>English</option><option>Arabic</option><option>Urdu</option><option>French</option><option>Malay / Indonesian</option><option>Other</option></select></div>
+        <div class="form-group"><label>What kind of support are you looking for?</label><select><option>Islamic guidance + clinical therapist</option><option>Islamic guidance only</option><option>Clinical therapist only</option><option>Not sure — help me decide</option></select></div>
+        <div class="anon-row"><div class="form-group"><label>Insurance / payment</label><select><option>Use insurance</option><option>Self-pay</option><option>Need financial aid</option><option>Not sure yet</option></select></div><div class="form-group"><label>Privacy preference</label><select><option>Share my profile with matched providers</option><option>Keep my intake limited until I choose</option><option>Anonymous community only for now</option></select></div></div>
+        <div class="intake-nav"><button class="btn-back" onclick="goStep(1)">← Back</button><button class="btn-next" onclick="goStep(3)">Continue →</button></div>
+      </div>
+      <!-- step 3 -->
+      <div class="intake-step" id="step3">
+        <div class="intake-q">Your comfort level</div>
+        <div class="intake-sub">There is no wrong answer.</div>
+        <div style="display:flex;flex-direction:column;gap:.75rem;margin-bottom:1.5rem;">
+          <button class="option-btn" onclick="selectOpt(this)"><div class="opt-title">I want a Muslim therapist</div><div class="opt-sub">Someone who shares my faith from the inside</div></button>
+          <button class="option-btn" onclick="selectOpt(this)"><div class="opt-title">Open to a Muslim-aware therapist</div><div class="opt-sub">Non-Muslim is fine, as long as they respect Islamic values</div></button>
+          <button class="option-btn" onclick="selectOpt(this)"><div class="opt-title">I have my own therapist</div><div class="opt-sub">I just need the Islamic guidance framework to bring to them</div></button>
+        </div>
+        <div class="anon-row"><div class="form-group"><label>Urgency level</label><select><option>Routine — this week or later</option><option>Soon — within 72 hours</option><option>Urgent but not an emergency</option></select></div><div class="form-group"><label>Care format</label><select><option>Telehealth preferred</option><option>In-person preferred</option><option>Open to either</option></select></div></div><div class="form-group"><label>Anything else you'd like us to know (optional)</label><textarea placeholder="Share as much or as little as you're comfortable with..."></textarea></div>
+        <div class="intake-nav"><button class="btn-back" onclick="goStep(2)">← Back</button><button class="btn-next" onclick="goStep(4)">Find my match →</button></div>
+      </div>
+      <!-- step 4 result -->
+      <div class="intake-step" id="step4">
+        <div class="intake-q">Your match is ready</div>
+        <div class="intake-sub">Based on your responses, here are your recommended providers and guidance pathway.</div>
+        <div class="result-card">
+          <div class="result-heading">Matched providers</div>
+          <div class="result-sub">OCD & Waswas · English · Female preference · Insurance-compatible</div>
+          <div class="result-insights">
+            <div class="result-mini"><div class="result-mini-label">Why these matches</div><div class="result-mini-value">Strong specialty fit, language comfort, and faith-integrated care.</div></div>
+            <div class="result-mini"><div class="result-mini-label">Fallback ready</div><div class="result-mini-value">If availability changes, your Islamic guidance plan and trusted backup providers stay available.</div></div>
+            <div class="result-mini"><div class="result-mini-label">Funding option</div><div class="result-mini-value">You may qualify for subsidised sessions through community sponsorship and zakat-funded aid.</div></div>
+          </div>
+          <div class="result-providers">
+            <div class="rp-card"><div class="rp-av">SA</div><div><div class="rp-name">Sheikh Abdullah Al-Rashidi</div><div class="rp-role">Islamic scholar · OCD & waswas specialist</div></div><button class="rp-btn">Schedule</button></div>
+            <div class="rp-card"><div class="rp-av">FH</div><div><div class="rp-name">Dr. Fatima Hassan</div><div class="rp-role">Muslim CBT therapist · Neurodivergence</div></div><button class="rp-btn">Schedule</button></div>
+          </div>
+          <div class="result-btns">
+            <button class="res-btn-o" onclick="showPage('fallback')">View fallback plan</button>
+            <button class="res-btn-f">Book consultation</button>
+          </div>
+          <div class="survey-preview">
+            <div class="trust-card-title">After your first visit</div>
+            <div class="trust-card-desc">We send a short follow-up survey so matching improves over time.</div>
+            <div class="survey-grid">
+              <div class="survey-item">Did you feel understood by the provider?</div>
+              <div class="survey-item">Did the provider respect your Islamic values?</div>
+              <div class="survey-item">Would you continue with this provider?</div>
+              <div class="survey-item">What could Sakinah match better next time?</div>
+            </div>
+          </div>
+        </div>
+        <p style="margin-top:1.25rem;font-size:.8rem;color:var(--text-muted);line-height:1.65;">Not the right fit? <span style="color:var(--deep-green);cursor:pointer;font-weight:500;" onclick="showPage('providers')">Browse all providers</span> · <span style="color:var(--deep-green);cursor:pointer;font-weight:500;" onclick="showPage('scholarship')">Apply for financial scholarship</span> · <span style="color:var(--deep-green);cursor:pointer;font-weight:500;" onclick="showPage('ai-answers')">Ask Khalil a question first</span> · <span style="color:var(--deep-green);cursor:pointer;font-weight:500;" onclick="showPage('fallback')">See fallback care options</span>.</p>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+</div>
+
+<!-- ══ PROVIDERS ══ -->
+<div id="page-providers" class="page">
+<section style="padding-top:8rem;background:var(--cream);">
+<div class="container">
+  <div class="s-label">Our network</div>
+  <h2 class="s-title">Scholars & <em>therapists</em></h2>
+  <p class="s-desc">Every provider on Sakinah is vetted for credentials, service area, specialty, and faith compatibility. Users can compare insurance, licensure, language, availability, and integration style before booking.</p>
+  <div class="filter-bar"><div class="filter-chip">Specialty</div><div class="filter-chip">Insurance</div><div class="filter-chip">State / Telehealth</div><div class="filter-chip">Language / Gender</div></div><div style="margin-top:1rem;margin-bottom:.75rem;font-size:.85rem;font-weight:500;color:var(--deep-green);">Islamic scholars</div>
+  <div class="prov-grid">
+    <div class="prov-card"><div class="prov-avatar av-teal">SA</div><div style="width:100%;"><div class="prov-name">Sheikh Abdullah Al-Rashidi <span class="badge-inline">Scholar advisory</span></div><div class="prov-role">Fiqh of mental health · OCD & waswas</div><div class="prov-tags"><span class="ptag">OCD</span><span class="ptag">waswas</span><span class="ptag">Arabic / English</span><span class="ptag">online</span></div><div class="provider-meta"><div class="provider-cell"><div class="provider-cell-label">Focus</div><div class="provider-cell-value">Scrupulosity, religious uncertainty</div></div><div class="provider-cell"><div class="provider-cell-label">Response time</div><div class="provider-cell-value">48 hours</div></div><div class="provider-cell"><div class="provider-cell-label">Care style</div><div class="provider-cell-value">Scholar-informed framework</div></div><div class="provider-cell"><div class="provider-cell-label">Availability</div><div class="provider-cell-value">Virtual consults</div></div></div><div class="provider-actions"><button class="provider-btn primary">Request consult</button><button class="provider-btn secondary">View profile</button></div></div></div>
+    <div class="prov-card"><div class="prov-avatar av-gold">YM</div><div style="width:100%;"><div class="prov-name">Sheikh Yusuf Mahdi</div><div class="prov-role">Fiqh of illness & disability · Tourette's</div><div class="prov-tags"><span class="ptag">Tourette's</span><span class="ptag">chronic illness</span><span class="ptag">Arabic / French</span></div><div class="provider-meta"><div class="provider-cell"><div class="provider-cell-label">Focus</div><div class="provider-cell-value">Excuses in salah, fasting, wudu</div></div><div class="provider-cell"><div class="provider-cell-label">Response time</div><div class="provider-cell-value">72 hours</div></div><div class="provider-cell"><div class="provider-cell-label">Care style</div><div class="provider-cell-value">Accessible fiqh guidance</div></div><div class="provider-cell"><div class="provider-cell-label">Availability</div><div class="provider-cell-value">Consult + document review</div></div></div><div class="provider-actions"><button class="provider-btn primary">Request consult</button><button class="provider-btn secondary">View profile</button></div></div></div>
+  </div>
+  <div style="margin-top:2rem;margin-bottom:.75rem;font-size:.85rem;font-weight:500;color:var(--deep-green);">Therapists & clinicians</div>
+  <div class="prov-grid">
+    <div class="prov-card"><div class="prov-avatar av-gold">FH</div><div style="width:100%;"><div class="prov-name">Dr. Fatima Hassan</div><div class="prov-role">Muslim CBT therapist · Neurodivergence</div><div class="prov-tags"><span class="ptag">ADHD</span><span class="ptag">anxiety</span><span class="ptag">English / Urdu</span><span class="ptag">scholar-coordinated</span></div><div class="provider-meta"><div class="provider-cell"><div class="provider-cell-label">Insurance</div><div class="provider-cell-value">Aetna, BCBS, self-pay</div></div><div class="provider-cell"><div class="provider-cell-label">Serves</div><div class="provider-cell-value">CA, NY, TX via telehealth</div></div><div class="provider-cell"><div class="provider-cell-label">Availability</div><div class="provider-cell-value">Next opening in 3 days</div></div><div class="provider-cell"><div class="provider-cell-label">Integration</div><div class="provider-cell-value">Explicit faith-integrated care</div></div></div><div class="provider-actions"><button class="provider-btn primary">Book intake</button><button class="provider-btn secondary">Save profile</button></div></div></div>
+    <div class="prov-card"><div class="prov-avatar av-teal">NA</div><div style="width:100%;"><div class="prov-name">Dr. Nour Al-Amin</div><div class="prov-role">Muslim psychologist · Trauma & grief</div><div class="prov-tags"><span class="ptag">PTSD</span><span class="ptag">grief</span><span class="ptag">postpartum</span><span class="ptag">Arabic / English</span></div><div class="provider-meta"><div class="provider-cell"><div class="provider-cell-label">Insurance</div><div class="provider-cell-value">Self-pay + scholarship eligible</div></div><div class="provider-cell"><div class="provider-cell-label">Serves</div><div class="provider-cell-value">Global telehealth consults</div></div><div class="provider-cell"><div class="provider-cell-label">Availability</div><div class="provider-cell-value">Within 1 week</div></div><div class="provider-cell"><div class="provider-cell-label">Integration</div><div class="provider-cell-value">Trauma-informed Islamic care</div></div></div><div class="provider-actions"><button class="provider-btn primary">Book intake</button><button class="provider-btn secondary">Save profile</button></div></div></div>
+  </div>
+  <p style="margin-top:1.5rem;font-size:.8rem;color:var(--text-muted);font-style:italic;">Profiles are illustrative examples. Actual network being established.</p><div class="onboard-grid"><div class="onboard-card"><div class="trust-card-title">Join as a clinic</div><div class="trust-card-desc">List multiple Muslim clinicians, manage availability, show accepted insurance, and receive referred users who already completed intake.</div><div class="provider-actions"><button class="provider-btn primary">Clinic onboarding</button><button class="provider-btn secondary">See requirements</button></div></div><div class="onboard-card"><div class="trust-card-title">Join as an individual provider</div><div class="trust-card-desc">Create a profile, verify licensure, note faith-integration style, and receive direct matches from users looking for your specialty.</div><div class="provider-actions"><button class="provider-btn primary">Individual onboarding</button><button class="provider-btn secondary">Provider FAQ</button></div></div></div><p style="margin-top:1.5rem;font-size:.8rem;color:var(--text-muted);font-style:italic;"></p>
+</div>
+</section>
+</div>
+
+<!-- ══ LIBRARY ══ -->
+<div id="page-library" class="page">
+<section style="padding-top:8rem;">
+<div class="container">
+  <div class="s-label">Guidance library</div>
+  <h2 class="s-title">Islamic insights on <em>mental health</em></h2>
+  <p class="s-desc">Scholar-reviewed guidance on how Islam approaches modern mental health conditions — free for every Muslim, anywhere in the world.</p>
+  <div class="lib-grid">
+    <div class="lib-card"><div class="lib-icon">🧠</div><div class="lib-title">OCD & Waswas — what Islam says</div><div class="lib-desc">Understanding the difference between clinical OCD and waswas — and why "just ignore it" is actually the correct Islamic and clinical advice for both.</div><div class="lib-link">Read guidance →</div></div>
+    <div class="lib-card"><div class="lib-icon">⚡</div><div class="lib-title">ADHD, ibadah & Islamic life</div><div class="lib-desc">How Islam accommodates neurodivergence, rulings on medication during Ramadan, maintaining focus in salah, and strategies grounded in fiqh and science.</div><div class="lib-link">Read guidance →</div></div>
+    <div class="lib-card"><div class="lib-icon">🌊</div><div class="lib-title">Tourette's & Islamic obligations</div><div class="lib-desc">What is excused under fiqh regarding tics during salah, wudu, and fasting. Rulings on the fiqh of illness and disability as they apply to Tourette syndrome.</div><div class="lib-link">Read guidance →</div></div>
+    <div class="lib-card"><div class="lib-icon">💭</div><div class="lib-title">Anxiety, tawakkul & the Quran</div><div class="lib-desc">Islamic perspectives on anxiety — distinguishing it from weak faith, understanding tawakkul as an active practice, integrating CBT with Islamic mindfulness.</div><div class="lib-link">Read guidance →</div></div>
+    <div class="lib-card"><div class="lib-icon">🤲</div><div class="lib-title">Grief, sabr & Islamic meaning-making</div><div class="lib-desc">How Islam frames loss, grief through a Quranic lens, and how sabr is not suppression — paired with trauma-informed care principles.</div><div class="lib-link">Read guidance →</div></div>
+    <div class="lib-card"><div class="lib-icon">🌙</div><div class="lib-title">Is seeking therapy permissible?</div><div class="lib-desc">Scholarly consensus on the Islamic obligation to seek treatment, the role of medicine in Islamic tradition, and how to remove the stigma from seeking help.</div><div class="lib-link">Read guidance →</div></div>
+  </div>
+</div>
+  <div class="edu-roadmap"><div class="road-card"><div class="road-kicker">Track 01</div><div class="trust-card-title">Waswas vs OCD</div><div class="safe-desc">Understand scrupulosity, ERP, and what Islamic guidance does and does not require.</div></div><div class="road-card"><div class="road-kicker">Track 02</div><div class="trust-card-title">Grief & patience</div><div class="safe-desc">Lessons from prophetic loss, sabr, and emotional honesty.</div></div><div class="road-card"><div class="road-kicker">Track 03</div><div class="trust-card-title">Tawakkul & treatment</div><div class="safe-desc">How reliance on Allah and seeking therapy or medication work together.</div></div><div class="road-card"><div class="road-kicker">Track 04</div><div class="trust-card-title">Neurodivergence & worship</div><div class="safe-desc">ADHD, tics, focus, accommodations, and compassion in practice.</div></div></div>
+</section>
+</div>
+
+<!-- ══ COMMUNITY ══ -->
+<div id="page-community" class="page">
+<section class="hero" style="min-height:72vh;">
+  <div class="hero-arabic">مجتمع</div>
+  <div class="hero-eyebrow">Community & education</div>
+  <h1 class="hero-title">Heal with <em>knowledge</em><br>and belonging</h1>
+  <p class="hero-sub">A moderated space for Muslim stories, practical questions, and educational reflections rooted in prophetic mercy, resilience, and hope.</p>
+  <div class="hero-btns">
+    <button class="btn-primary" onclick="openKhalil()">Start with Khalil</button>
+    <button class="btn-outline" onclick="showPage('intake')">Build your profile</button>
+  </div>
+</section>
+
+<section>
+<div class="container">
+  <div class="s-label">What you can do here</div>
+  <h2 class="s-title">Community support and <em>Islamic learning</em></h2>
+  <p class="s-desc">Some users need a provider match right away. Others first need reassurance, language for what they feel, and a place to learn from people who understand.</p>
+
+  <div class="ce-grid reveal">
+    <div class="ce-card">
+      <div class="ce-icon">💬</div>
+      <div class="ce-title">Community tab</div>
+      <div class="ce-desc">Users can share stories, ask questions, and support each other in a safe, moderated environment. Anonymous posting helps reduce stigma and makes it easier to open up.</div>
+      <div class="ce-list">
+        <span class="ce-chip">Anonymous posts</span><span class="ce-chip">Peer support</span><span class="ce-chip">Moderated replies</span><span class="ce-chip">Faith-sensitive questions</span>
+      </div>
+    </div>
+    <div class="ce-card">
+      <div class="ce-icon">📚</div>
+      <div class="ce-title">Education hub</div>
+      <div class="ce-desc">Short lectures, reflections, and guided content connect mental health with Islamic tradition through stories from the Prophet Muhammad ﷺ and the Sahabah.</div>
+      <div class="ce-list">
+        <span class="ce-chip">Prophetic stories</span><span class="ce-chip">Sabr & grief</span><span class="ce-chip">Tawakkul</span><span class="ce-chip">Healing without stigma</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="community-rules reveal"><div class="rule-card"><div class="rule-title">Anonymous by choice</div><div class="rule-desc">Users can post anonymously or with limited identity sharing.</div></div><div class="rule-card"><div class="rule-title">Moderated, not chaotic</div><div class="rule-desc">Community replies are reviewed for safety, stigma, and accuracy.</div></div><div class="rule-card"><div class="rule-title">No diagnoses in comments</div><div class="rule-desc">Peers can share experience, not diagnose or replace treatment.</div></div><div class="rule-card"><div class="rule-title">No fatwa-by-thread</div><div class="rule-desc">Religious rulings escalate to qualified scholars when needed.</div></div></div><div class="community-feed reveal">
+    <div class="feed-card">
+      <div class="feed-head"><div class="feed-name">Anonymous sister</div><div class="feed-meta">OCD & waswas</div></div>
+      <div class="feed-text">I used to repeat wudu over and over because I was scared it was invalid. Reading other Muslims’ experiences helped me realise I was not alone — and that I could get both Islamic and clinical support.</div>
+      <div class="feed-actions">Read responses →</div>
+    </div>
+    <div class="feed-card">
+      <div class="feed-head"><div class="feed-name">Brother Yusuf</div><div class="feed-meta">Anxiety</div></div>
+      <div class="feed-text">My question was whether therapy would weaken tawakkul. The discussion and lecture library helped me understand that seeking treatment is part of trusting Allah, not against it.</div>
+      <div class="feed-actions">Join discussion →</div>
+    </div>
+    <div class="feed-card">
+      <div class="feed-head"><div class="feed-name">New Muslim revert</div><div class="feed-meta">Belonging</div></div>
+      <div class="feed-text">I needed a space where I could ask mental health questions without feeling judged. The community tab gave me language, comfort, and next steps before I was ready to book care.</div>
+      <div class="feed-actions">See similar stories →</div>
+    </div>
+  </div>
+
+  <div class="edu-banner reveal">
+    <div class="edu-title">Educational lecture series</div>
+    <div class="edu-desc">The learning hub helps users see that hardship, sadness, fear, patience, and recovery are part of the human story in Islam. It reduces stigma while giving practical and spiritual context.</div>
+    <div class="edu-cards">
+      <div class="edu-card"><div class="edu-kicker">Lecture 01</div><div class="edu-card-title">Grief in the life of the Prophet ﷺ</div><div class="edu-card-desc">How loss, sadness, and mercy appear in prophetic life — and why emotional pain is not a sign of weak faith.</div></div>
+      <div class="edu-card"><div class="edu-kicker">Lecture 02</div><div class="edu-card-title">Sabr, resilience, and the Sahabah</div><div class="edu-card-desc">Stories of patience and endurance that help users frame healing through hope, community, and reliance on Allah.</div></div>
+      <div class="edu-card"><div class="edu-kicker">Lecture 03</div><div class="edu-card-title">When to seek help</div><div class="edu-card-desc">Scholar- and clinician-informed lessons on when therapy, medication, and support systems become part of faithful care.</div></div>
+    </div>
+  </div>
+</div>
+  <div class="edu-roadmap reveal"><div class="road-card"><div class="road-kicker">Series A</div><div class="trust-card-title">Prophetic mercy in hardship</div><div class="safe-desc">Emotional pain, compassion, and healing through the life of the Prophet ﷺ.</div></div><div class="road-card"><div class="road-kicker">Series B</div><div class="trust-card-title">Companions and resilience</div><div class="safe-desc">Stories from the Sahabah on loss, endurance, and communal support.</div></div><div class="road-card"><div class="road-kicker">Series C</div><div class="trust-card-title">Faith-sensitive coping tools</div><div class="safe-desc">Dhikr, grounding, journaling, support systems, and therapy-friendly routines.</div></div><div class="road-card"><div class="road-kicker">Series D</div><div class="trust-card-title">When to seek professional help</div><div class="safe-desc">A structured path from reflection to provider matching when symptoms persist.</div></div></div>
+</section>
+</div>
+
+<!-- ══ FALLBACK ══ -->
+<div id="page-fallback" class="page">
+<section style="padding-top:8rem;background:var(--cream);">
+<div class="container">
+  <div class="s-label">Trusted fallback care</div>
+  <h2 class="s-title">When a Muslim provider is not <em>available</em></h2>
+  <p class="s-desc">Sakinah does not leave users at a dead end. When a Muslim provider is not feasible because of location, cost, timing, or licensure, the platform offers a faith-safe pathway forward.</p>
+  <div class="fallback-grid">
+    <div class="fallback-panel">
+      <div class="trust-card-title">Islamically safe therapy guide</div>
+      <div class="safe-desc">Use this with a trusted non-Muslim provider who respects Islamic values and stays within clinical scope.</div>
+      <div class="check-list">
+        <div class="check-item"><span>✓</span><span><b>Say this in session:</b> I want treatment that respects my Islamic beliefs and practices.</span></div>
+        <div class="check-item"><span>✓</span><span><b>Ask:</b> Have you worked with practicing Muslim clients or other faith-based populations?</span></div>
+        <div class="check-item"><span>✓</span><span><b>Watch for red flags:</b> mocking prayer, hijab, fasting, or pushing clearly haram behavior as care.</span></div>
+        <div class="check-item"><span>✓</span><span><b>Escalate religious questions:</b> therapists handle therapy, scholars handle fiqh.</span></div>
+      </div>
+      <div class="provider-actions"><button class="provider-btn primary">Download first-session guide</button><button class="provider-btn secondary" onclick="showPage('providers')">See trusted providers</button><button class="provider-btn secondary" onclick="showPage('scholarship')">Apply for scholarship</button></div>
+    </div>
+    <div class="fallback-panel">
+      <div class="trust-card-title">Trusted provider backup</div>
+      <div class="safe-grid" style="grid-template-columns:1fr;gap:.75rem;margin-top:1rem;">
+        <div class="safe-card"><div class="safe-title">Respectful clinician screening</div><div class="safe-desc">Vetted for cultural humility, faith sensitivity, and willingness to coordinate with a scholar-informed framework.</div></div>
+        <div class="safe-card"><div class="safe-title">Care handoff packet</div><div class="safe-desc">Bring your Sakinah care summary, preferences, and boundaries to any therapist worldwide.</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="aid-banner">
+    <div class="s-label" style="color:var(--gold-light);">Financial assistance</div>
+    <h2 class="s-title" style="color:white;margin-bottom:.6rem;">Care should not stop at <em>cost</em></h2>
+    <p class="s-desc" style="color:rgba(255,255,255,.65);">Users can apply for subsidised sessions through hardship-based aid, community sponsorship, masjid partnerships, grants, and zakat-supported care pathways where applicable.</p>
+    <div class="aid-points">
+      <div class="aid-point"><div class="trust-card-title" style="color:white;">Apply</div><div class="safe-desc" style="color:rgba(255,255,255,.56);">Short financial-aid screening built into intake.</div></div>
+      <div class="aid-point"><div class="trust-card-title" style="color:white;">Qualify</div><div class="safe-desc" style="color:rgba(255,255,255,.56);">Hardship-based review with privacy-conscious documentation.</div></div>
+      <div class="aid-point"><div class="trust-card-title" style="color:white;">Activate</div><div class="safe-desc" style="color:rgba(255,255,255,.56);">Receive sponsored sessions or reduced-rate care when available.</div></div>
+    </div>
+  </div>
+</div>
+</section>
+</div>
+
+<!-- ══ CRISIS ══ -->
+<div id="page-crisis" class="page">
+<section style="padding-top:8rem;">
+<div class="container">
+  <div class="s-label">Urgent support</div>
+  <h2 class="s-title">Get help <em>right now</em></h2>
+  <p class="s-desc">Sakinah is not an emergency service. If someone may be in immediate danger, seek urgent local support first.</p>
+  <div class="safe-grid">
+    <div class="safe-card"><div class="safe-title">Immediate danger</div><div class="safe-desc">Call local emergency services or go to the nearest emergency room.</div></div>
+    <div class="safe-card"><div class="safe-title">Crisis line</div><div class="safe-desc">Contact a suicide and crisis hotline available in your country or region.</div></div>
+    <div class="safe-card"><div class="safe-title">After safety is secured</div><div class="safe-desc">Return to Sakinah for provider matching, guidance, and follow-up care planning.</div></div>
+  </div>
+  <div class="provider-actions"><button class="provider-btn primary" onclick="showPage('intake')">Return to intake</button><button class="provider-btn secondary" onclick="openKhalil()">Ask Khalil for next steps</button></div>
+</div>
+</section>
+</div>
+
+<!-- KHALIL POPUP -->
+<button class="khalil-fab" onclick="openKhalil()" aria-label="Open Khalil AI">
+  <span class="khalil-dot"></span>
+  <span class="khalil-label">Chat with Khalil</span>
+</button>
+<div class="khalil-modal" id="khalilModal" onclick="closeKhalil(event)">
+  <div class="khalil-panel" onclick="event.stopPropagation()">
+    <div class="khalil-top">
+      <div class="khalil-top-left">
+        <div class="khalil-avatar">K</div>
+        <div>
+          <div class="khalil-name">AI (Khalil)</div>
+          <div class="khalil-status">Ready to help you build your profile</div>
+        </div>
+      </div>
+      <button class="khalil-close" onclick="closeKhalil()">×</button>
+    </div>
+    <div class="khalil-body">
+      <div class="khalil-bubble">As-salamu alaykum. I’m Khalil. I can help you build your profile, choose the right care path, prepare for matching, and point you toward fallback or financial-aid options when needed.</div>
+      <div class="khalil-options">
+        <button class="khalil-pill" onclick="showPage('ai-answers');closeKhalil();">Ask a question</button>
+        <button class="khalil-pill" onclick="showPage('intake');closeKhalil();">Start my profile</button>
+        <button class="khalil-pill" onclick="showPage('providers');closeKhalil();">Browse providers</button>
+        <button class="khalil-pill" onclick="showPage('scholarship');closeKhalil();">Scholarship / financial aid</button>
+        <button class="khalil-pill" onclick="showPage('community');closeKhalil();">See community</button>
+        <button class="khalil-pill" onclick="showPage('fallback');closeKhalil();">Fallback care</button>
+      </div>
+      <div class="safe-desc" style="font-size:.74rem;">Khalil does not provide diagnosis, therapy, emergency intervention, or religious rulings.</div>
+      <div class="khalil-cta-row">
+        <button class="khalil-primary" onclick="showPage('ai-answers');closeKhalil();">Ask a question</button>
+        <button class="khalil-secondary" onclick="showPage('intake');closeKhalil();">Begin matching</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SCHOLARSHIP ══ -->
+<div id="page-scholarship" class="page">
+<div class="scholarship-hero">
+  <div class="hero-arabic" style="font-size:2rem;margin-bottom:.75rem;">الزكاة</div>
+  <div class="hero-eyebrow" style="color:rgba(255,255,255,.6);">Financial assistance</div>
+  <h1 class="hero-title" style="color:white;">Care should never stop <em>at cost</em></h1>
+  <p class="hero-sub" style="color:rgba(255,255,255,.65);">Sakinah's scholarship programme — funded by zakat, sadaqah, grants, and masjid partnerships — ensures that no Muslim is denied support due to financial hardship.</p>
+  <div class="hero-btns" style="margin-top:2rem;">
+    <button class="btn-primary" onclick="showPage('intake')">Apply in 2 minutes</button>
+    <button class="btn-outline" style="color:white;border-color:rgba(255,255,255,.25);" onclick="showPage('providers')">Browse providers first</button>
+  </div>
+</div>
+
+<section>
+<div class="container">
+  <div class="s-label">Who this is for</div>
+  <h2 class="s-title">If finance is the <em>only barrier</em></h2>
+  <p class="s-desc">You should not have to choose between your mental health and your financial stability. Sakinah's scholarship is designed for Muslims who would otherwise not be able to access care.</p>
+  <div class="scholarship-grid reveal">
+    <div class="schol-card">
+      <div class="schol-icon">🤲</div>
+      <div class="schol-title">Zakat-funded sessions</div>
+      <div class="schol-desc">Eligible sessions are fully subsidised through zakat contributions from donors across the community. You receive the same vetted care — at no cost.</div>
+      <div style="margin-top:1.25rem;"><button class="provider-btn primary" onclick="showPage('intake')">Check eligibility</button></div>
+    </div>
+    <div class="schol-card">
+      <div class="schol-icon">🕌</div>
+      <div class="schol-title">Masjid & community partnerships</div>
+      <div class="schol-desc">Many partner mosques sponsor care for their congregants. Enter your postcode or masjid affiliation to see if you qualify for local community sponsorship.</div>
+      <div style="margin-top:1.25rem;"><button class="provider-btn primary">Check my masjid</button></div>
+    </div>
+    <div class="schol-card">
+      <div class="schol-icon">📋</div>
+      <div class="schol-title">Sliding-scale & reduced rates</div>
+      <div class="schol-desc">For those who don't qualify for full scholarship, many Sakinah providers offer sliding-scale fees. We'll show you what's available at every price point.</div>
+      <div style="margin-top:1.25rem;"><button class="provider-btn primary">See sliding rates</button></div>
+    </div>
+  </div>
+
+  <div class="schol-steps reveal" style="margin-top:3.5rem;">
+    <div style="margin-bottom:1.5rem;"><div class="s-label">How it works</div><h2 class="s-title">Apply in <em>minutes</em></h2></div>
+    <div class="schol-step"><div class="schol-num">01</div><div><div class="schol-step-title">Complete a short financial screening</div><div class="schol-step-desc">A brief, private form — typically 4–6 questions — to assess eligibility. No proof of income required at this stage.</div></div></div>
+    <div class="schol-step"><div class="schol-num">02</div><div><div class="schol-step-title">Receive your eligibility decision</div><div class="schol-step-desc">Most applicants receive a decision within 24 hours. Decisions are made with privacy-conscious, hardship-based criteria — not bureaucratic gatekeeping.</div></div></div>
+    <div class="schol-step"><div class="schol-num">03</div><div><div class="schol-step-title">Get matched and proceed to care</div><div class="schol-step-desc">Your scholarship unlocks the same full intake process — provider matching, Islamic guidance, and follow-up care — at no cost to you.</div></div></div>
+    <div class="schol-step" style="border-bottom:none;"><div class="schol-num">04</div><div><div class="schol-step-title">Donate to help others</div><div class="schol-step-desc">If your situation improves, you can choose to pay it forward. Your contribution becomes zakat or sadaqah for the next Muslim who needs care.</div></div></div>
+  </div>
+</div>
+</section>
+
+<section class="ts-section">
+<div class="container">
+  <div class="s-label" style="color:var(--gold-light);">Funded by</div>
+  <h2 class="s-title" style="color:white;">How the <em style="color:var(--gold);">fund</em> is sustained</h2>
+  <p class="s-desc" style="color:rgba(255,255,255,.6);">Sakinah's scholarship fund is built on the Islamic principle of collective responsibility — one community taking care of another.</p>
+  <div class="fund-sources reveal">
+    <div class="fund-src"><div class="fund-src-name">Zakat</div><div class="fund-src-label">Eligible as a category of need</div></div>
+    <div class="fund-src"><div class="fund-src-name">Sadaqah</div><div class="fund-src-label">Voluntary donation from donors</div></div>
+    <div class="fund-src"><div class="fund-src-name">Grants</div><div class="fund-src-label">Mental health & equity grants</div></div>
+    <div class="fund-src"><div class="fund-src-name">Masjids</div><div class="fund-src-label">Community mosque partnerships</div></div>
+  </div>
+  <div style="margin-top:2.5rem;display:flex;gap:1rem;flex-wrap:wrap;">
+    <button class="btn-primary" onclick="showPage('intake')">Apply for scholarship</button>
+    <button class="btn-outline" style="color:white;border-color:rgba(255,255,255,.25);">Donate to the fund</button>
+    <button class="btn-outline" style="color:white;border-color:rgba(255,255,255,.25);">Partner your masjid</button>
+  </div>
+</div>
+</section>
+
+<section style="background:var(--cream);text-align:center;padding:4rem 2rem;">
+<div class="container">
+  <div class="s-label" style="text-align:center;">Still not sure?</div>
+  <h2 class="s-title" style="text-align:center;max-width:560px;margin:0 auto 1rem;">Other paths if cost is not the <em>main issue</em></h2>
+  <div class="qp-grid reveal" style="margin-top:2rem;">
+    <div class="qp-card"><div class="qp-kicker">Ask first</div><div class="qp-title">Use the AI Answer engine</div><div class="qp-desc">Get your question answered from vetted Islamic and clinical sources — for free, immediately, with no intake required.</div><div class="qp-link" onclick="showPage('ai-answers')">Ask a question →</div></div>
+    <div class="qp-card"><div class="qp-kicker">Read first</div><div class="qp-title">Guidance library</div><div class="qp-desc">Free Islamic guidance on OCD, ADHD, Tourette's, anxiety, grief and more — scholar-reviewed and freely available to every Muslim worldwide.</div><div class="qp-link" onclick="showPage('library')">Browse library →</div></div>
+    <div class="qp-card"><div class="qp-kicker">Fallback path</div><div class="qp-title">Trusted non-Muslim provider</div><div class="qp-desc">Get a personalised Islamic framework document to bring to any therapist worldwide — completely free, no matching required.</div><div class="qp-link" onclick="showPage('fallback')">See fallback path →</div></div>
+  </div>
+</div>
+</section>
+</div>
+
+<!-- ══ AI ANSWERS ══ -->
+<div id="page-ai-answers" class="page">
+<section class="ai-engine-section" style="padding-top:8rem;padding-bottom:5rem;">
+<div class="container">
+  <div class="s-label" style="color:var(--gold-light);">AI answer engine</div>
+  <h2 class="s-title" style="color:white;">Find the answer <em style="color:var(--gold);">that already exists</em></h2>
+  <p class="s-desc" style="color:rgba(255,255,255,.65);">Many official Islamic and clinical sources have already answered your question. Khalil searches across vetted fatwa portals, mental health guidance databases, and scholar-reviewed content — so you don't have to.</p>
+  <div style="display:flex;gap:1rem;margin-top:2rem;flex-wrap:wrap;">
+    <button class="btn-primary" onclick="openKhalil()">Ask Khalil now</button>
+    <button class="btn-outline" style="color:white;border-color:rgba(255,255,255,.25);" onclick="showPage('intake')">Skip to provider matching</button>
+  </div>
+  <div class="ai-engine-demo reveal">
+    <div style="font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:1rem;">Example — live search</div>
+    <div class="ai-search-bar">
+      <div class="ai-search-icon">🔍</div>
+      <div class="ai-search-text">"Is it haram to take antidepressants during Ramadan?"</div>
+    </div>
+    <div class="ai-answer-card">
+      <div class="ai-answer-source">📋 IslamQA · Scholar-reviewed · Confidence: High</div>
+      <div class="ai-answer-text">The majority scholarly position is that taking medication during Ramadan when medically necessary does not nullify the fast if taken orally, as it is considered treatment, not nourishment. However, individual cases may vary based on necessity and method — consult a scholar familiar with your situation.</div>
+      <div class="ai-answer-link">Source: islamqa.info · Last reviewed 2023 · <span style="color:var(--gold);">View original →</span></div>
+    </div>
+    <div class="ai-answer-card">
+      <div class="ai-answer-source">🧠 Sakinah Guidance Library · Clinician + scholar reviewed</div>
+      <div class="ai-answer-text">Depression is a clinical condition, not a sign of weak faith. Medication can be an important part of treatment. Islamic scholars widely affirm the permissibility of antidepressants — and seeking treatment is considered an obligation, not a concession.</div>
+      <div class="ai-answer-link">Source: Sakinah Guidance Library · <span style="color:var(--gold);">Read full guidance →</span></div>
+    </div>
+    <div class="ai-next-step">
+      <div><div class="ai-next-label">Your next step</div><div class="ai-next-action">Match with a scholar who can give a personalised ruling for your situation</div></div>
+      <button class="provider-btn primary" onclick="showPage('intake')">Begin matching →</button>
+    </div>
+    <div class="ai-sources-note">Khalil searches across vetted sources including IslamQA, SeekersGuidance, Yaqeen Institute, NHS mental health guidance, and Sakinah's own library. Answers are attributed and linked — Khalil never fabricates rulings or invents citations. When no vetted answer exists, Khalil says so and routes you to a live scholar.</div>
+  </div>
+</div>
+</section>
+
+<section>
+<div class="container">
+  <div class="s-label">Trusted sources</div>
+  <h2 class="s-title">Where Khalil <em>searches</em></h2>
+  <p class="s-desc">Khalil does not generate answers from scratch. It matches your question to existing, vetted content — so you always know where the information comes from.</p>
+  <div class="scholarship-grid reveal">
+    <div class="schol-card">
+      <div class="schol-icon">🕌</div>
+      <div class="schol-title">Islamic scholarly sources</div>
+      <div class="schol-desc">IslamQA, SeekersGuidance, Yaqeen Institute, and Sakinah's own scholar-reviewed library. Questions about fiqh, waswas, medication rulings, and worship accommodations.</div>
+    </div>
+    <div class="schol-card">
+      <div class="schol-icon">🧠</div>
+      <div class="schol-title">Clinical mental health guidance</div>
+      <div class="schol-desc">NHS mental health resources, NICE guidelines, and Sakinah's clinician-reviewed content — matched with Islamic context to give whole-person answers.</div>
+    </div>
+    <div class="schol-card">
+      <div class="schol-icon">💬</div>
+      <div class="schol-title">Community-answered questions</div>
+      <div class="schol-desc">Verified, moderated answers from the Sakinah community — real Muslims who have navigated similar questions, reviewed for accuracy before surfacing.</div>
+      <div style="margin-top:1rem;"><button class="provider-btn secondary" onclick="showPage('community')">Browse community answers</button></div>
+    </div>
+  </div>
+
+  <div class="problem-quote reveal" style="max-width:700px;margin-top:3rem;">
+    <div class="pq-label">Why we built this</div>
+    <div class="pq-text">"The answer to your question probably already exists on an official website — you just couldn't find it. Khalil finds it in seconds, tells you where it came from, and then connects you to a human who can go deeper."</div>
+    <div class="pq-source">Sakinah design principle · AI is a guide, not the answer</div>
+    <div style="margin-top:1.75rem;display:flex;gap:.75rem;flex-wrap:wrap;">
+      <button class="provider-btn primary" onclick="openKhalil()">Ask Khalil now</button>
+      <button class="provider-btn secondary" onclick="showPage('intake')">Go to full matching</button>
+      <button class="provider-btn secondary" onclick="showPage('library')">Browse guidance library</button>
+    </div>
+  </div>
+</div>
+</section>
+
+<section style="background:var(--cream);">
+<div class="container">
+  <div class="s-label">What Khalil can and cannot do</div>
+  <h2 class="s-title">Honest about <em>limits</em></h2>
+  <div class="ts-grid reveal" style="margin-top:2rem;">
+    <div class="ts-card" style="background:rgba(26,58,47,.06);border-color:rgba(26,58,47,.12);"><div class="ts-icon" style="color:var(--deep-green);">✓</div><div class="ts-title" style="color:var(--deep-green);">Surfaces existing vetted answers</div><div class="ts-desc" style="color:var(--text-mid);">Matches your question to pre-existing, scholar-reviewed content from trusted sources.</div></div>
+    <div class="ts-card" style="background:rgba(26,58,47,.06);border-color:rgba(26,58,47,.12);"><div class="ts-icon" style="color:var(--deep-green);">✓</div><div class="ts-title" style="color:var(--deep-green);">Explains Islamic context</div><div class="ts-desc" style="color:var(--text-mid);">Helps you understand how your condition relates to waswas, tawakkul, sabr, fiqh of illness, and more.</div></div>
+    <div class="ts-card" style="background:rgba(26,58,47,.06);border-color:rgba(26,58,47,.12);"><div class="ts-icon" style="color:var(--deep-green);">✓</div><div class="ts-title" style="color:var(--deep-green);">Routes to the right care path</div><div class="ts-desc" style="color:var(--text-mid);">Decides whether to connect you with a scholar, therapist, scholarship, or community — based on your question.</div></div>
+    <div class="ts-card" style="background:rgba(255,245,245,.8);border-color:rgba(192,57,43,.12);"><div class="ts-icon">✗</div><div class="ts-title" style="color:#9B2B2B;">Does not issue personal fatwas</div><div class="ts-desc" style="color:var(--text-mid);">Khalil cannot give you a personalised religious ruling. It connects you to a qualified scholar who can.</div></div>
+    <div class="ts-card" style="background:rgba(255,245,245,.8);border-color:rgba(192,57,43,.12);"><div class="ts-icon">✗</div><div class="ts-title" style="color:#9B2B2B;">Does not provide therapy</div><div class="ts-desc" style="color:var(--text-mid);">Khalil is not a therapist and cannot provide diagnosis, treatment, or crisis intervention.</div></div>
+    <div class="ts-card" style="background:rgba(255,245,245,.8);border-color:rgba(192,57,43,.12);"><div class="ts-icon">✗</div><div class="ts-title" style="color:#9B2B2B;">Does not fabricate sources</div><div class="ts-desc" style="color:var(--text-mid);">If no vetted answer exists for your question, Khalil says so — and escalates to a live scholar or clinician.</div></div>
+  </div>
+</div>
+</section>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Saki<span>nah</span></div>
+  <div class="footer-links">
+    <a onclick="showPage('home')">Home</a>
+    <a onclick="showPage('ai-answers')">Ask a question</a>
+    <a onclick="showPage('intake')">Get support</a>
+    <a onclick="showPage('providers')">Providers</a>
+    <a onclick="showPage('scholarship')">Scholarship</a>
+    <a onclick="showPage('community')">Community</a>
+    <a onclick="showPage('fallback')">Fallback care</a>
+    <a onclick="showPage('library')">Guidance library</a>
+    <a onclick="showPage('fallback')">Donate / Zakat</a>
+    <a onclick="showPage('providers')">For providers</a>
+    <a>Privacy</a>
+    <a>Contact</a>
+  </div>
+  <div class="footer-copy">© 2026 Sakinah · Financial aid available · سكينة</div>
+</footer>
+
+<script>
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function openKhalil(){
+  document.getElementById('khalilModal').classList.add('open');
+}
+function closeKhalil(e){
+  if(!e || e.target.id==='khalilModal') document.getElementById('khalilModal').classList.remove('open');
+}
+function scrollTo(id){
+  showPage('home');
+  setTimeout(()=>{
+    const el=document.getElementById(id);
+    if(el)el.scrollIntoView({behavior:'smooth'});
+  },150);
+}
+function selectOpt(el){
+  const parent=el.closest('.intake-step')||el.closest('.intake-card');
+  parent.querySelectorAll('.option-btn').forEach(b=>b.classList.remove('selected'));
+  el.classList.add('selected');
+}
+let cur=1;
+function goStep(n){
+  document.getElementById('step'+cur).classList.remove('active');
+  document.getElementById('step'+n).classList.add('active');
+  for(let i=1;i<=4;i++){
+    const dot=document.getElementById('pd'+i);
+    const line=document.getElementById('pl'+i);
+    if(i<n){dot.className='prog-dot done';if(line)line.className='prog-line done';}
+    else if(i===n){dot.className='prog-dot active';}
+    else{dot.className='prog-dot pending';if(line)line.className='prog-line';}
+  }
+  cur=n;
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');}),{threshold:0.08});
+document.querySelectorAll('.reveal').forEach(r=>obs.observe(r));
+setTimeout(()=>{if(document.getElementById('page-home').classList.contains('active')) document.getElementById('khalilModal').classList.add('open');},1800);
+document.addEventListener('keydown',e=>{if(e.key==='Escape') document.getElementById('khalilModal').classList.remove('open');});
+</script>
+</body>
+</html>
